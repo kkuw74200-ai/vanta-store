@@ -6,9 +6,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
+const ADMIN_KEY = process.env.VANTA_ADMIN_KEY;
 
 const DATA_DIR = path.join(__dirname, "data");
 const ORDERS_FILE = path.join(DATA_DIR, "orders.json");
+const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 
 if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -16,6 +18,10 @@ if (!fs.existsSync(DATA_DIR)) {
 
 if (!fs.existsSync(ORDERS_FILE)) {
     fs.writeFileSync(ORDERS_FILE, "[]", "utf8");
+}
+
+if (!fs.existsSync(VISITS_FILE)) {
+    fs.writeFileSync(VISITS_FILE, "[]", "utf8");
 }
 
 app.use(express.json({ limit: "2mb" }));
@@ -39,8 +45,40 @@ function saveOrders(orders) {
     );
 }
 
+function readVisits() {
+    try {
+        return JSON.parse(
+            fs.readFileSync(VISITS_FILE, "utf8")
+        );
+    } catch {
+        return [];
+    }
+}
+
+function saveVisits(visits) {
+    fs.writeFileSync(
+        VISITS_FILE,
+        JSON.stringify(visits, null, 2),
+        "utf8"
+    );
+}
+
 function createOrderId() {
     return `VANTA-${Math.floor(10000 + Math.random() * 90000)}`;
+}
+
+function getDevice(req) {
+    const userAgent = String(req.headers["user-agent"] || "").toLowerCase();
+
+    if (/tablet|ipad|android(?!.*mobile)/i.test(userAgent)) {
+        return "tablet";
+    }
+
+    if (/mobile|iphone|ipod|android/i.test(userAgent)) {
+        return "mobile";
+    }
+
+    return "desktop";
 }
 
 async function sendDiscordOrder(order) {
@@ -117,6 +155,112 @@ async function sendDiscordOrder(order) {
     }
 }
 
+/* =========================
+   تسجيل الزيارات
+========================= */
+
+app.post("/api/visit", (req, res) => {
+
+    const visits = readVisits();
+
+    const now = new Date();
+
+    visits.push({
+        timestamp: now.toISOString(),
+        date: now.toISOString().slice(0, 10),
+        device: getDevice(req)
+    });
+
+    saveVisits(visits);
+
+    res.json({
+        success: true
+    });
+});
+
+/* =========================
+   الإحصائيات
+========================= */
+
+app.get("/api/stats", (req, res) => {
+
+    if (!ADMIN_KEY) {
+        return res.status(500).json({
+            error: "VANTA_ADMIN_KEY غير موجود في Environment Variables"
+        });
+    }
+
+    const providedKey = req.headers["x-admin-key"];
+
+    if (!providedKey || providedKey !== ADMIN_KEY) {
+        return res.status(401).json({
+            error: "مفتاح الإدارة غير صحيح"
+        });
+    }
+
+    const visits = readVisits();
+    const orders = readOrders();
+
+    const now = Date.now();
+
+    const today = new Date()
+        .toISOString()
+        .slice(0, 10);
+
+    const totalVisits = visits.length;
+
+    const todayVisits = visits.filter(
+        visit => visit.date === today
+    ).length;
+
+    const activeVisitors = visits.filter(visit => {
+        const time = new Date(visit.timestamp).getTime();
+
+        return (
+            now - time <= 5 * 60 * 1000
+        );
+    }).length;
+
+    const mobile = visits.filter(
+        visit => visit.device === "mobile"
+    ).length;
+
+    const desktop = visits.filter(
+        visit => visit.device === "desktop"
+    ).length;
+
+    const tablet = visits.filter(
+        visit => visit.device === "tablet"
+    ).length;
+
+    const recent = [...orders]
+        .reverse()
+        .slice(0, 10)
+        .map(order => ({
+            orderId: order.orderId,
+            service: order.service,
+            projectName: order.projectName,
+            budget: order.budget,
+            status: order.status,
+            createdAt: order.createdAt
+        }));
+
+    res.json({
+        totalVisits,
+        todayVisits,
+        activeVisitors,
+        mobile,
+        desktop,
+        tablet,
+        totalOrders: orders.length,
+        recent
+    });
+});
+
+/* =========================
+   الطلبات
+========================= */
+
 app.post("/api/orders", async (req, res) => {
 
     const {
@@ -163,6 +307,7 @@ app.post("/api/orders", async (req, res) => {
     };
 
     orders.push(order);
+
     saveOrders(orders);
 
     try {
@@ -181,6 +326,10 @@ app.post("/api/orders", async (req, res) => {
     });
 });
 
+/* =========================
+   جلب طلب معين
+========================= */
+
 app.get("/api/orders/:id", (req, res) => {
 
     const orders = readOrders();
@@ -197,6 +346,10 @@ app.get("/api/orders/:id", (req, res) => {
 
     res.json(order);
 });
+
+/* =========================
+   تشغيل السيرفر
+========================= */
 
 app.listen(PORT, () => {
     console.log(`🚀 VANTA يعمل على المنفذ ${PORT}`);
