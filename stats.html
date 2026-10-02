@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VANTA — الإحصائيات</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #09070d;
+      color: #fff;
+      min-height: 100vh;
+      padding: 25px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .header {
+      background: #111019;
+      border: 1px solid #282132;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      color: #a970ff;
+      margin-bottom: 7px;
+    }
+
+    .header p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .login {
+      background: #111019;
+      border: 1px solid #282132;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #30283c;
+      background: #0b0910;
+      color: white;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      background: #8b4dff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #7639e8;
+    }
+
+    .error {
+      color: #ff5d70;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .stats {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: #111019;
+      border: 1px solid #282132;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .card span {
+      display: block;
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #b47cff;
+    }
+
+    .online {
+      color: #4cff91;
+    }
+
+    .refresh {
+      margin-top: 20px;
+      background: #17131f;
+      border: 1px solid #30283c;
+    }
+
+    .last-orders {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .order {
+      background: #111019;
+      border: 1px solid #282132;
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+    .order strong {
+      color: #b47cff;
+    }
+
+    @media (max-width: 700px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>VANTA</h1>
+    <p>لوحة إحصائيات الموقع</p>
+  </div>
+
+  <div class="login">
+    <input
+      type="password"
+      id="adminKey"
+      placeholder="اكتب مفتاح الإدارة"
+      autocomplete="off"
+    >
+
+    <button onclick="loadStats()">
+      🔐 دخول
+    </button>
+
+    <div class="error" id="error">
+      مفتاح الإدارة غير صحيح أو صار خطأ
+    </div>
+  </div>
+
+  <div class="stats" id="stats">
+
+    <div class="card">
+      <span>👥 إجمالي الزوار</span>
+      <div class="number" id="totalVisits">0</div>
+    </div>
+
+    <div class="card">
+      <span>📅 زوار اليوم</span>
+      <div class="number" id="todayVisits">0</div>
+    </div>
+
+    <div class="card">
+      <span>🟢 الموجودين الآن</span>
+      <div class="number online" id="activeVisitors">0</div>
+    </div>
+
+    <div class="card">
+      <span>📱 زوار الجوال</span>
+      <div class="number" id="mobile">0</div>
+    </div>
+
+    <div class="card">
+      <span>💻 زوار الكمبيوتر</span>
+      <div class="number" id="desktop">0</div>
+    </div>
+
+    <div class="card">
+      <span>🛒 إجمالي الطلبات</span>
+      <div class="number" id="totalOrders">0</div>
+    </div>
+
+  </div>
+
+  <button
+    class="refresh"
+    id="refreshBtn"
+    onclick="loadStats()"
+    style="display:none;"
+  >
+    🔄 تحديث الإحصائيات
+  </button>
+
+  <div class="last-orders" id="lastOrders">
+    <div class="header">
+      <h2>📋 آخر الطلبات</h2>
+    </div>
+
+    <div id="ordersList"></div>
+  </div>
+
+</div>
+
+<script>
+
+let adminKey = "";
+
+async function loadStats() {
+
+  if (!adminKey) {
+    adminKey = document.getElementById("adminKey").value.trim();
+  }
+
+  if (!adminKey) {
+    showError("اكتب مفتاح الإدارة");
+    return;
+  }
+
+  try {
+
+    const response = await fetch("/api/stats", {
+      method: "GET",
+      headers: {
+        "x-admin-key": adminKey
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "فشل الدخول");
+    }
+
+    document.getElementById("totalVisits").textContent =
+      data.totalVisits ?? 0;
+
+    document.getElementById("todayVisits").textContent =
+      data.todayVisits ?? 0;
+
+    document.getElementById("activeVisitors").textContent =
+      data.activeVisitors ?? 0;
+
+    document.getElementById("mobile").textContent =
+      data.mobile ?? 0;
+
+    document.getElementById("desktop").textContent =
+      data.desktop ?? 0;
+
+    document.getElementById("totalOrders").textContent =
+      data.totalOrders ?? 0;
+
+    document.getElementById("stats").style.display = "grid";
+    document.getElementById("refreshBtn").style.display = "block";
+
+    showOrders(data.recent || []);
+
+    document.getElementById("error").style.display = "none";
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.getElementById("stats").style.display = "none";
+    document.getElementById("refreshBtn").style.display = "none";
+
+    showError("مفتاح الإدارة غير صحيح أو السيرفر ما يدعم الإحصائيات");
+  }
+}
+
+function showOrders(orders) {
+
+  const box = document.getElementById("ordersList");
+  const section = document.getElementById("lastOrders");
+
+  box.innerHTML = "";
+
+  if (!orders.length) {
+    box.innerHTML = `
+      <div class="order">
+        لا توجد طلبات حتى الآن
+      </div>
+    `;
+
+    section.style.display = "block";
+    return;
+  }
+
+  orders.forEach(order => {
+
+    const div = document.createElement("div");
+
+    div.className = "order";
+
+    div.innerHTML = `
+      <strong>${escapeHtml(order.orderId || "بدون رقم")}</strong>
+      <br>
+      🛠️ ${escapeHtml(order.service || "غير محدد")}
+      <br>
+      📁 ${escapeHtml(order.projectName || "بدون اسم")}
+      <br>
+      💰 ${escapeHtml(order.budget || "غير محدد")}
+      <br>
+      📌 ${escapeHtml(order.status || "غير محدد")}
+    `;
+
+    box.appendChild(div);
+  });
+
+  section.style.display = "block";
+}
+
+function showError(message) {
+  const error = document.getElementById("error");
+  error.textContent = message;
+  error.style.display = "block";
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+document.getElementById("adminKey").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    loadStats();
+  }
+});
+
+</script>
+
+</body>
+</html>
