@@ -3,404 +3,701 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>VANTA — Discord Services & Programming</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="navbar">
-    <div class="logo">VANTA<span>.</span></div>
-    <div class="nav-status">
-        <i></i> متاحين للطلبات
+
+    <div class="logo">
+        VANTA<span>.</span>
     </div>
+
+    <div class="nav-status">
+        <i></i>
+        متاحين للطلبات
+    </div>
+
+    <a
+        class="discord-top"
+        href="https://discord.gg/hMUXdaf58"
+        target="_blank"
+    >
+        Discord
+    </a>
+
 </header>
+
 
 <main>
 
-    <!-- الصفحة الرئيسية -->
-    <section id="home" class="screen active">
-        <div class="hero">
-            <div class="badge">VANTA SERVICES</div>
 
-            <h1>نبني فكرتك<br><span>بشكل احترافي.</span></h1>
+<!-- الرئيسية -->
+<section id="home" class="screen active">
 
-            <p>
-                خدمات Discord والبرمجة والتصميم
-                في مكان واحد.
-            </p>
+    <div class="hero">
 
-            <button class="main-btn" onclick="showScreen('instructions')">
-                🚀 ابدأ الآن
-            </button>
+        <div class="badge">
+            VANTA SERVICES
         </div>
 
-        <div class="services-preview">
-            <div>🤖<span>Discord Bots</span></div>
-            <div>💻<span>Programming</span></div>
-            <div>🛡️<span>Protection</span></div>
-            <div>🎨<span>Design</span></div>
-        </div>
-    </section>
+        <h1>
+            نبني فكرتك<br>
+            <span>بشكل احترافي.</span>
+        </h1>
 
+        <p>
+            خدمات Discord والبرمجة والتصميم
+            في مكان واحد.
+        </p>
 
-    <!-- التعليمات -->
-    <section id="instructions" class="screen">
-
-        <div class="page-head">
-            <div class="small-logo">VANTA</div>
-            <h2>قبل ما تبدأ</h2>
-            <p>اقرأ التعليمات التالية قبل إرسال طلبك</p>
-        </div>
-
-        <div class="instruction-list">
-
-            <div class="instruction">
-                <b>01</b>
-                <div>
-                    <strong>اختر الخدمة</strong>
-                    <p>اختر الخدمة المناسبة لمشروعك.</p>
-                </div>
-            </div>
-
-            <div class="instruction">
-                <b>02</b>
-                <div>
-                    <strong>اكتب التفاصيل</strong>
-                    <p>وضح فكرتك ومتطلباتك بشكل دقيق.</p>
-                </div>
-            </div>
-
-            <div class="instruction">
-                <b>03</b>
-                <div>
-                    <strong>أرفق الملفات</strong>
-                    <p>أرسل الصور أو الأمثلة أو الملفات المهمة.</p>
-                </div>
-            </div>
-
-            <div class="instruction">
-                <b>04</b>
-                <div>
-                    <strong>حدد الميزانية</strong>
-                    <p>حدد الميزانية المناسبة لك.</p>
-                </div>
-            </div>
-
-            <div class="instruction">
-                <b>05</b>
-                <div>
-                    <strong>المراجعة</strong>
-                    <p>فريق VANTA يراجع طلبك.</p>
-                </div>
-            </div>
-
-            <div class="instruction">
-                <b>06</b>
-                <div>
-                    <strong>السعر والتنفيذ</strong>
-                    <p>يتم تحديد السعر ومدة التنفيذ قبل البدء.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="warning">
-            ⚠️ لا ترسل كلمات المرور أو البيانات الخاصة.
-        </div>
-
-        <button class="main-btn" onclick="showScreen('services')">
-            🚀 ابدأ طلبك
+        <button
+            class="main-btn"
+            onclick="showScreen('instructions')"
+        >
+            🚀 ابدأ الآن
         </button>
 
-        <button class="back-btn" onclick="showScreen('home')">
-            رجوع
-        </button>
-
-    </section>
+    </div>
 
 
-    <!-- الخدمات -->
-    <section id="services" class="screen">
+    <div class="services-preview">
 
-        <div class="page-head">
-            <div class="small-logo">VANTA</div>
-            <h2>اختر الخدمة</h2>
-            <p>وش تحتاج نسوي لك؟</p>
+        <div>
+            <span class="preview-icon">🤖</span>
+            <span>Discord Bots</span>
         </div>
 
-        <div class="category-title">Discord</div>
-
-        <div class="service-grid">
-
-            <button class="service" onclick="selectService('Discord Bot')">
-                <span>🤖</span>
-                <strong>Discord Bot</strong>
-                <small>بوتات وأنظمة مخصصة</small>
-            </button>
-
-            <button class="service" onclick="selectService('Discord Systems')">
-                <span>⚙️</span>
-                <strong>Discord Systems</strong>
-                <small>أنظمة متكاملة للسيرفر</small>
-            </button>
-
-            <button class="service" onclick="selectService('Server Protection')">
-                <span>🛡️</span>
-                <strong>Server Protection</strong>
-                <small>حماية وإدارة السيرفر</small>
-            </button>
-
-            <button class="service" onclick="selectService('Server Design')">
-                <span>🎨</span>
-                <strong>Server Design</strong>
-                <small>تنسيق وتصميم السيرفر</small>
-            </button>
-
+        <div>
+            <span class="preview-icon">🌐</span>
+            <span>Websites</span>
         </div>
 
-
-        <div class="category-title">Programming</div>
-
-        <div class="service-grid">
-
-            <button class="service" onclick="selectService('Website')">
-                <span>🌐</span>
-                <strong>Website</strong>
-                <small>مواقع احترافية</small>
-            </button>
-
-            <button class="service" onclick="selectService('Application')">
-                <span>📱</span>
-                <strong>Application</strong>
-                <small>تطبيقات مخصصة</small>
-            </button>
-
-            <button class="service" onclick="selectService('Script')">
-                <span>💻</span>
-                <strong>Script</strong>
-                <small>سكربتات وبرمجة</small>
-            </button>
-
-            <button class="service" onclick="selectService('Custom Programming')">
-                <span>🧩</span>
-                <strong>Custom Programming</strong>
-                <small>برمجة خاصة</small>
-            </button>
-
+        <div>
+            <span class="preview-icon">🖥️</span>
+            <span>Discord Servers</span>
         </div>
 
-
-        <div class="category-title">Design</div>
-
-        <div class="service-grid">
-
-            <button class="service" onclick="selectService('Logo')">
-                <span>✦</span>
-                <strong>Logo</strong>
-                <small>شعارات</small>
-            </button>
-
-            <button class="service" onclick="selectService('Banners')">
-                <span>🖼️</span>
-                <strong>Banners</strong>
-                <small>بنرات وتصاميم</small>
-            </button>
-
-            <button class="service" onclick="selectService('Discord Design')">
-                <span>🎭</span>
-                <strong>Discord Design</strong>
-                <small>تصاميم Discord</small>
-            </button>
-
-            <button class="service" onclick="selectService('Visual Identity')">
-                <span>💎</span>
-                <strong>Visual Identity</strong>
-                <small>هوية بصرية</small>
-            </button>
-
+        <div>
+            <span class="preview-icon">🎨</span>
+            <span>Design</span>
         </div>
 
-        <button class="back-btn" onclick="showScreen('instructions')">
-            رجوع
-        </button>
+    </div>
 
-    </section>
+</section>
 
 
-    <!-- التفاصيل -->
-    <section id="details" class="screen">
 
-        <div class="page-head">
-            <div class="step">02 / 06</div>
-            <h2>تفاصيل المشروع</h2>
-            <p id="selectedServiceText"></p>
+<!-- التعليمات -->
+<section id="instructions" class="screen">
+
+    <div class="page-head">
+
+        <div class="small-logo">
+            VANTA
         </div>
 
-        <label>اسم المشروع</label>
-        <input id="projectName" type="text" placeholder="مثال: Dominion RP">
+        <h2>
+            قبل ما تبدأ
+        </h2>
 
-        <label>وش تبي نسوي لك؟</label>
-        <textarea id="description" placeholder="اكتب فكرتك ومتطلباتك بالتفصيل..."></textarea>
+        <p>
+            اقرأ التعليمات التالية قبل إرسال طلبك
+        </p>
 
-        <label>مثال أو رابط يساعدنا</label>
-        <input id="reference" type="text" placeholder="اختياري">
-
-        <label>سرعة التنفيذ</label>
-
-        <select id="speed">
-            <option value="عادي">عادي</option>
-            <option value="مستعجل">مستعجل</option>
-            <option value="حسب المشروع">حسب المشروع</option>
-        </select>
-
-        <button class="main-btn" onclick="goBudget()">
-            التالي
-        </button>
-
-        <button class="back-btn" onclick="showScreen('services')">
-            رجوع
-        </button>
-
-    </section>
+    </div>
 
 
-    <!-- الميزانية -->
-    <section id="budget" class="screen">
+    <div class="instruction-list">
 
-        <div class="page-head">
-            <div class="step">04 / 06</div>
-            <h2>الميزانية</h2>
-            <p>حدد الميزانية المناسبة لمشروعك</p>
-        </div>
-
-        <div class="budget-grid">
-
-            <button onclick="selectBudget('أقل من 10 د.ك')">
-                أقل من 10 د.ك
-            </button>
-
-            <button onclick="selectBudget('10 - 25 د.ك')">
-                10 - 25 د.ك
-            </button>
-
-            <button onclick="selectBudget('25 - 50 د.ك')">
-                25 - 50 د.ك
-            </button>
-
-            <button onclick="selectBudget('50 - 100 د.ك')">
-                50 - 100 د.ك
-            </button>
-
-            <button onclick="selectBudget('100+ د.ك')">
-                100+ د.ك
-            </button>
-
-            <button onclick="selectBudget('غير محدد')">
-                غير محدد
-            </button>
-
-        </div>
-
-        <button class="main-btn" onclick="reviewOrder()">
-            👀 مراجعة الطلب
-        </button>
-
-        <button class="back-btn" onclick="showScreen('details')">
-            رجوع
-        </button>
-
-    </section>
-
-
-    <!-- المراجعة -->
-    <section id="review" class="screen">
-
-        <div class="page-head">
-            <div class="step">05 / 06</div>
-            <h2>راجع طلبك</h2>
-            <p>تأكد من البيانات قبل الإرسال</p>
-        </div>
-
-        <div class="review-box">
+        <div class="instruction">
+            <b>01</b>
 
             <div>
-                <span>الخدمة</span>
-                <strong id="reviewService"></strong>
+                <strong>اختر الخدمة</strong>
+
+                <p>
+                    اختر الخدمة المناسبة لمشروعك.
+                </p>
             </div>
+        </div>
+
+
+        <div class="instruction">
+            <b>02</b>
 
             <div>
-                <span>اسم المشروع</span>
-                <strong id="reviewProject"></strong>
+                <strong>اكتب التفاصيل</strong>
+
+                <p>
+                    وضح فكرتك ومتطلباتك بشكل دقيق.
+                </p>
             </div>
+        </div>
+
+
+        <div class="instruction">
+            <b>03</b>
 
             <div>
-                <span>التفاصيل</span>
-                <strong id="reviewDescription"></strong>
+                <strong>أرفق الملفات</strong>
+
+                <p>
+                    أرسل الصور أو الأمثلة أو الملفات المهمة.
+                </p>
             </div>
+        </div>
+
+
+        <div class="instruction">
+            <b>04</b>
 
             <div>
-                <span>المرجع</span>
-                <strong id="reviewReference"></strong>
+                <strong>حدد الميزانية</strong>
+
+                <p>
+                    حدد الميزانية المناسبة لك.
+                </p>
             </div>
+        </div>
+
+
+        <div class="instruction">
+            <b>05</b>
 
             <div>
-                <span>الميزانية</span>
-                <strong id="reviewBudget"></strong>
+                <strong>المراجعة</strong>
+
+                <p>
+                    فريق VANTA يراجع طلبك.
+                </p>
             </div>
+        </div>
+
+
+        <div class="instruction">
+            <b>06</b>
 
             <div>
-                <span>السرعة</span>
-                <strong id="reviewSpeed"></strong>
+                <strong>السعر والتنفيذ</strong>
+
+                <p>
+                    يتم تحديد السعر ومدة التنفيذ قبل البدء.
+                </p>
             </div>
+        </div>
+
+    </div>
+
+
+    <div class="warning">
+        ⚠️ لا ترسل كلمات المرور أو البيانات الخاصة.
+    </div>
+
+
+    <button
+        class="main-btn"
+        onclick="showScreen('services')"
+    >
+        🚀 ابدأ طلبك
+    </button>
+
+
+    <button
+        class="back-btn"
+        onclick="showScreen('home')"
+    >
+        رجوع
+    </button>
+
+</section>
+
+
+
+<!-- الخدمات -->
+<section id="services" class="screen">
+
+    <div class="page-head">
+
+        <div class="small-logo">
+            VANTA
+        </div>
+
+        <h2>
+            اختر الخدمة
+        </h2>
+
+        <p>
+            وش تحتاج نسوي لك؟
+        </p>
+
+    </div>
+
+
+    <div class="category-title">
+        SERVICES
+    </div>
+
+
+    <div class="service-grid">
+
+
+        <button
+            class="service"
+            onclick="selectService('بوت ديسكورد')"
+        >
+
+            <span class="service-icon">
+                🤖
+            </span>
+
+            <strong>
+                بوت ديسكورد
+            </strong>
+
+            <small>
+                بوتات وأنظمة مخصصة
+            </small>
+
+        </button>
+
+
+        <button
+            class="service"
+            onclick="selectService('موقع')"
+        >
+
+            <span class="service-icon">
+                🌐
+            </span>
+
+            <strong>
+                موقع
+            </strong>
+
+            <small>
+                مواقع احترافية
+            </small>
+
+        </button>
+
+
+        <button
+            class="service"
+            onclick="selectService('سيرفر ديسكورد جاهز')"
+        >
+
+            <span class="service-icon">
+                🖥️
+            </span>
+
+            <strong>
+                سيرفر ديسكورد جاهز
+            </strong>
+
+            <small>
+                سيرفر متكامل وجاهز
+            </small>
+
+        </button>
+
+
+        <button
+            class="service"
+            onclick="selectService('بنر')"
+        >
+
+            <span class="service-icon">
+                🖼️
+            </span>
+
+            <strong>
+                بنر
+            </strong>
+
+            <small>
+                بنرات احترافية
+            </small>
+
+        </button>
+
+
+        <button
+            class="service"
+            onclick="selectService('تصميم شعار')"
+        >
+
+            <span class="service-icon">
+                ✦
+            </span>
+
+            <strong>
+                تصميم شعار
+            </strong>
+
+            <small>
+                شعار خاص بهوية مشروعك
+            </small>
+
+        </button>
+
+
+        <button
+            class="service"
+            onclick="selectService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
+        >
+
+            <span class="service-icon">
+                🎨
+            </span>
+
+            <strong>
+                تصميم سيرفر ديسكورد
+            </strong>
+
+            <small>
+                فكرة خاصة فيك
+            </small>
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="back-btn"
+        onclick="showScreen('instructions')"
+    >
+        رجوع
+    </button>
+
+</section>
+
+
+
+<!-- التفاصيل -->
+<section id="details" class="screen">
+
+    <div class="page-head">
+
+        <div class="step">
+            02 / 06
+        </div>
+
+        <h2>
+            تفاصيل المشروع
+        </h2>
+
+        <p id="selectedServiceText"></p>
+
+    </div>
+
+
+    <label>
+        اسم المشروع
+    </label>
+
+    <input
+        id="projectName"
+        type="text"
+        placeholder="مثال: Dominion RP"
+    >
+
+
+    <label>
+        وش تبي نسوي لك؟
+    </label>
+
+    <textarea
+        id="description"
+        placeholder="اكتب فكرتك ومتطلباتك بالتفصيل..."
+    ></textarea>
+
+
+    <label>
+        مثال أو رابط يساعدنا
+    </label>
+
+    <input
+        id="reference"
+        type="text"
+        placeholder="اختياري"
+    >
+
+
+    <label>
+        سرعة التنفيذ
+    </label>
+
+    <select id="speed">
+
+        <option value="عادي">
+            عادي
+        </option>
+
+        <option value="مستعجل">
+            مستعجل
+        </option>
+
+        <option value="حسب المشروع">
+            حسب المشروع
+        </option>
+
+    </select>
+
+
+    <button
+        class="main-btn"
+        onclick="goBudget()"
+    >
+        التالي
+    </button>
+
+
+    <button
+        class="back-btn"
+        onclick="showScreen('services')"
+    >
+        رجوع
+    </button>
+
+</section>
+
+
+
+<!-- الميزانية -->
+<section id="budget" class="screen">
+
+    <div class="page-head">
+
+        <div class="step">
+            04 / 06
+        </div>
+
+        <h2>
+            الميزانية
+        </h2>
+
+        <p>
+            حدد الميزانية المناسبة لمشروعك
+        </p>
+
+    </div>
+
+
+    <div class="budget-grid">
+
+        <button onclick="selectBudget('أقل من 10 د.ك')">
+            أقل من 10 د.ك
+        </button>
+
+        <button onclick="selectBudget('10 - 25 د.ك')">
+            10 - 25 د.ك
+        </button>
+
+        <button onclick="selectBudget('25 - 50 د.ك')">
+            25 - 50 د.ك
+        </button>
+
+        <button onclick="selectBudget('50 - 100 د.ك')">
+            50 - 100 د.ك
+        </button>
+
+        <button onclick="selectBudget('100+ د.ك')">
+            100+ د.ك
+        </button>
+
+        <button onclick="selectBudget('غير محدد')">
+            غير محدد
+        </button>
+
+    </div>
+
+
+    <button
+        class="main-btn"
+        onclick="reviewOrder()"
+    >
+        👀 مراجعة الطلب
+    </button>
+
+
+    <button
+        class="back-btn"
+        onclick="showScreen('details')"
+    >
+        رجوع
+    </button>
+
+</section>
+
+
+
+<!-- المراجعة -->
+<section id="review" class="screen">
+
+    <div class="page-head">
+
+        <div class="step">
+            05 / 06
+        </div>
+
+        <h2>
+            راجع طلبك
+        </h2>
+
+        <p>
+            تأكد من البيانات قبل الإرسال
+        </p>
+
+    </div>
+
+
+    <div class="review-box">
+
+        <div>
+            <span>الخدمة</span>
+            <strong id="reviewService"></strong>
+        </div>
+
+        <div>
+            <span>اسم المشروع</span>
+            <strong id="reviewProject"></strong>
+        </div>
+
+        <div>
+            <span>التفاصيل</span>
+            <strong id="reviewDescription"></strong>
+        </div>
+
+        <div>
+            <span>المرجع</span>
+            <strong id="reviewReference"></strong>
+        </div>
+
+        <div>
+            <span>الميزانية</span>
+            <strong id="reviewBudget"></strong>
+        </div>
+
+        <div>
+            <span>السرعة</span>
+            <strong id="reviewSpeed"></strong>
+        </div>
+
+    </div>
+
+
+    <button
+        id="sendOrderBtn"
+        class="main-btn"
+        onclick="submitOrder()"
+    >
+        📨 إرسال الطلب
+    </button>
+
+
+    <button
+        class="back-btn"
+        onclick="showScreen('budget')"
+    >
+        تعديل
+    </button>
+
+</section>
+
+
+
+<!-- نجاح الطلب -->
+<section id="success" class="screen">
+
+    <div class="success">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <div class="badge">
+            ORDER CREATED
+        </div>
+
+        <h2>
+            تم إرسال طلبك
+        </h2>
+
+        <p>
+            تم استلام طلبك بنجاح وسيقوم فريق VANTA
+            بمراجعته.
+        </p>
+
+
+        <div class="order-number">
+
+            <span>
+                رقم الطلب
+            </span>
+
+            <strong id="orderId">
+                VANTA-00000
+            </strong>
 
         </div>
 
-        <button class="main-btn" onclick="submitOrder()">
-            📨 إرسال الطلب
-        </button>
 
-        <button class="back-btn" onclick="showScreen('budget')">
-            تعديل
-        </button>
-
-    </section>
-
-
-    <!-- النتيجة -->
-    <section id="success" class="screen">
-
-        <div class="success">
-
-            <div class="success-icon">✓</div>
-
-            <div class="badge">ORDER CREATED</div>
-
-            <h2>تم إرسال طلبك</h2>
-
-            <p>
-                تم استلام طلبك بنجاح وسيقوم فريق VANTA
-                بمراجعته.
-            </p>
-
-            <div class="order-number">
-                <span>رقم الطلب</span>
-                <strong id="orderId">VANTA-00000</strong>
-            </div>
-
-            <div class="status">
-                🟡 بانتظار المراجعة
-            </div>
-
-            <button class="main-btn" onclick="location.reload()">
-                العودة للرئيسية
-            </button>
-
+        <div class="status">
+            🟡 بانتظار المراجعة
         </div>
 
-    </section>
+
+        <p id="successMessage">
+            📨 للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت
+        </p>
+
+
+        <a
+            class="main-btn"
+            href="https://discord.gg/hMUXdaf58"
+            target="_blank"
+        >
+            دخول سيرفر Discord
+        </a>
+
+
+        <button
+            class="back-btn"
+            onclick="location.reload()"
+        >
+            العودة للرئيسية
+        </button>
+
+    </div>
+
+</section>
 
 </main>
+
+
+
+<footer class="vanta-footer">
+
+    <div>
+        التواصل مع الجهة المختصة
+    </div>
+
+    <a
+        href="https://wa.me/96598775651"
+        target="_blank"
+    >
+        WhatsApp — 98775651
+    </a>
+
+</footer>
+
 
 <script src="app.js"></script>
 
