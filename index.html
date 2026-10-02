@@ -4,702 +4,2224 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VANTA — Discord Services & Programming</title>
+    <title>VANTA — خدمات رقمية</title>
+    <meta name="description" content="VANTA للخدمات الرقمية والبرمجة والتصميم">
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 5%;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: 950;
+            letter-spacing: 2px;
+        }
+
+        .discord-top {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 22px;
+            border-radius: 13px;
+            text-decoration: none;
+            color: white;
+            background: #5865F2;
+            font-weight: 800;
+            transition: .2s;
+        }
+
+        .discord-top:hover {
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           SCREENS
+        ========================= */
+
+        .screen {
+            display: none;
+            min-height: 75vh;
+            padding: 70px 5%;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 85px);
+            line-height: 1.05;
+            margin: 20px 0;
+            font-weight: 950;
+        }
+
+        .hero h1 span {
+            color: #9b6cff;
+        }
+
+        .hero p {
+            color: #999;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================
+           LABELS
+        ========================= */
+
+        .section-label {
+            color: #a276ff;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .section-head {
+            max-width: 900px;
+            margin: 0 auto 45px;
+            text-align: center;
+        }
+
+        .section-head h2 {
+            font-size: 40px;
+            font-weight: 950;
+            margin: 12px 0;
+        }
+
+        .section-head p {
+            color: #999;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+
+        /* =========================
+           MAIN BUTTON
+        ========================= */
+
+        .main-btn {
+            border: 0;
+            padding: 17px 35px;
+            min-width: 230px;
+            border-radius: 15px;
+            color: white;
+            background: linear-gradient(135deg, #8b5cf6, #6d3df5);
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 12px 35px rgba(111,61,245,.25);
+            transition: .2s;
+        }
+
+        .main-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(111,61,245,.4);
+        }
+
+        .main-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           INSTRUCTIONS
+        ========================= */
+
+        .instructions-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .instructions-intro {
+            padding: 30px;
+            margin-bottom: 25px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139,92,246,.10),
+                    rgba(255,255,255,.025)
+                );
+
+            border: 1px solid rgba(139,92,246,.18);
+        }
+
+        .instructions-intro h3 {
+            margin: 0 0 12px;
+            font-size: 23px;
+        }
+
+        .instructions-intro p {
+            margin: 0;
+            color: #aaa;
+            line-height: 2;
+        }
+
+
+        /* STEPS */
+
+        .instruction-steps {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-step {
+            position: relative;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+
+            padding: 25px;
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            transition: .2s;
+        }
+
+        .instruction-step:hover {
+            transform: translateY(-3px);
+            border-color: rgba(139,92,246,.35);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #6d3df5
+                );
+
+            font-size: 17px;
+            font-weight: 950;
+
+            box-shadow:
+                0 8px 25px rgba(110,60,245,.2);
+        }
+
+        .step-content h3 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: #999;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+
+        /* IMPORTANT BOX */
+
+        .important-box {
+            margin-top: 25px;
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+        .important-box h3 {
+            margin: 0 0 18px;
+            font-size: 20px;
+        }
+
+        .important-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .important-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .important-item span {
+            color: #a276ff;
+            font-weight: 950;
+        }
+
+
+        /* ORDER FLOW */
+
+        .flow-box {
+            margin-top: 25px;
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139,92,246,.07),
+                    rgba(255,255,255,.02)
+                );
+
+            border: 1px solid rgba(139,92,246,.14);
+        }
+
+        .flow-box h3 {
+            margin: 0 0 20px;
+            font-size: 20px;
+        }
+
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .flow-item {
+            padding: 12px 16px;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.05);
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .flow-arrow {
+            color: #8b5cf6;
+            font-weight: 950;
+        }
+
+
+        /* INSTRUCTIONS ACTION */
+
+        .instructions-action {
+            margin-top: 35px;
+            padding: 35px;
+
+            text-align: center;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,92,246,.12),
+                    rgba(109,61,245,.04)
+                );
+
+            border: 1px solid rgba(139,92,246,.2);
+        }
+
+        .instructions-action h3 {
+            margin: 0 0 10px;
+            font-size: 24px;
+        }
+
+        .instructions-action p {
+            margin: 0 0 25px;
+            color: #999;
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        #services {
+            max-width: 1350px;
+            margin: auto;
+        }
+
+        #services .section-head {
+            margin-bottom: 50px;
+        }
+
+        #services .section-head h2 {
+            font-size: 42px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            position: relative;
+
+            min-height: 355px;
+
+            padding: 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(28,28,38,.98),
+                    rgba(12,12,17,.98)
+                );
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            cursor: pointer;
+            overflow: hidden;
+
+            transition: .25s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(151,104,255,.65);
+
+            box-shadow:
+                0 20px 55px rgba(100,50,220,.18);
+        }
+
+        .service-card.featured {
+            border-color: rgba(151,104,255,.35);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(40,25,65,.98),
+                    rgba(12,12,17,.98)
+                );
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 24px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139,92,246,.18),
+                    rgba(139,92,246,.05)
+                );
+
+            border: 1px solid rgba(155,110,255,.2);
+
+            font-size: 34px;
+        }
+
+        .service-card h3 {
+            margin: 0 0 12px;
+            font-size: 21px;
+            font-weight: 950;
+        }
+
+        .service-card p {
+            margin: 0;
+            color: #999;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .service-select {
+            width: 100%;
+
+            margin-top: auto;
+            padding: 16px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border: 1px solid rgba(160,110,255,.3);
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,92,246,.2),
+                    rgba(110,60,220,.1)
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 950;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .service-select:hover {
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #6d3df5
+                );
+
+            border-color: transparent;
+
+            box-shadow:
+                0 10px 30px rgba(110,60,245,.25);
+        }
+
+
+        /* =========================
+           FORMS
+        ========================= */
+
+        .details-form {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .details-form label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .details-form input,
+        .details-form textarea,
+        .details-form select,
+        .budget-box input {
+
+            width: 100%;
+
+            margin-bottom: 22px;
+
+            padding: 16px 18px;
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            border-radius: 15px;
+
+            outline: none;
+
+            color: white;
+
+            background: rgba(255,255,255,.04);
+
+            font-size: 15px;
+        }
+
+        .details-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+
+        /* =========================
+           BUDGET
+        ========================= */
+
+        .budget-box {
+            max-width: 550px;
+            margin: auto;
+            text-align: center;
+        }
+
+
+        /* =========================
+           REVIEW
+        ========================= */
+
+        .review-box {
+            max-width: 800px;
+
+            margin: 0 auto 30px;
+
+            padding: 10px 25px;
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,.03);
+
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .review-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 18px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .review-row:last-child {
+            border-bottom: 0;
+        }
+
+        .review-row span {
+            color: #888;
+        }
+
+        .review-row strong {
+            max-width: 65%;
+            text-align: left;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        .success-box {
+            max-width: 650px;
+
+            margin: 50px auto;
+
+            padding: 45px 30px;
+
+            text-align: center;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(30,30,40,.98),
+                    rgba(12,12,17,.98)
+                );
+
+            border: 1px solid rgba(139,92,246,.25);
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #6d3df5
+                );
+
+            font-size: 34px;
+            font-weight: 900;
+        }
+
+        .success-box h2 {
+            font-size: 32px;
+            margin: 15px 0;
+        }
+
+        .order-number {
+            margin: 20px 0;
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            background: rgba(139,92,246,.1);
+
+            color: #b18aff;
+
+            font-size: 22px;
+            font-weight: 950;
+        }
+
+        .success-box p {
+            color: #999;
+            line-height: 1.8;
+        }
+
+        .secondary-btn {
+            display: block;
+
+            margin: 15px auto 0;
+
+            padding: 14px 25px;
+
+            border: 1px solid rgba(255,255,255,.1);
+
+            border-radius: 14px;
+
+            color: white;
+
+            background: rgba(255,255,255,.04);
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 45px 5%;
+
+            text-align: center;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+        .footer-title {
+            font-weight: 900;
+            font-size: 17px;
+        }
+
+        .whatsapp-contacts {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 20px;
+        }
+
+        .whatsapp-button {
+            min-width: 190px;
+
+            padding: 14px 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: rgba(255,255,255,.04);
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            font-weight: 900;
+
+            transition: .2s;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            border-color: rgba(139,92,246,.5);
+        }
+
+        footer p {
+            color: #666;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .screen {
+                padding: 50px 18px;
+            }
+
+            .navbar {
+                padding: 16px 18px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section-head h2,
+            #services .section-head h2 {
+                font-size: 30px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-box {
+                grid-template-columns: 1fr;
+            }
+
+            .instruction-step {
+                padding: 20px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .review-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .review-row strong {
+                max-width: 100%;
+                text-align: right;
+            }
+
+            .whatsapp-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
 </head>
 
+
 <body>
+
 
 <header class="navbar">
 
     <div class="logo">
-        VANTA<span>.</span>
-    </div>
-
-    <div class="nav-status">
-        <i></i>
-        متاحين للطلبات
+        <span>VANTA</span>
     </div>
 
     <a
-        class="discord-top"
         href="https://discord.gg/hMUXdaf58"
         target="_blank"
+        class="discord-top"
     >
-        Discord
+        ديسكورد
     </a>
 
 </header>
 
 
+
 <main>
 
 
-<!-- الرئيسية -->
-<section id="home" class="screen active">
+    <!-- =========================
+         HOME
+    ========================= -->
 
-    <div class="hero">
+    <section id="home" class="screen active">
 
-        <div class="badge">
-            VANTA SERVICES
-        </div>
+        <div class="hero">
 
-        <h1>
-            نبني فكرتك<br>
-            <span>بشكل احترافي.</span>
-        </h1>
+            <div class="hero-content">
 
-        <p>
-            خدمات Discord والبرمجة والتصميم
-            في مكان واحد.
-        </p>
+                <div class="section-label">
+                    VANTA DIGITAL
+                </div>
 
-        <button
-            class="main-btn"
-            onclick="showScreen('instructions')"
-        >
-            🚀 ابدأ الآن
-        </button>
-
-    </div>
-
-
-    <div class="services-preview">
-
-        <div>
-            <span class="preview-icon">🤖</span>
-            <span>Discord Bots</span>
-        </div>
-
-        <div>
-            <span class="preview-icon">🌐</span>
-            <span>Websites</span>
-        </div>
-
-        <div>
-            <span class="preview-icon">🖥️</span>
-            <span>Discord Servers</span>
-        </div>
-
-        <div>
-            <span class="preview-icon">🎨</span>
-            <span>Design</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- التعليمات -->
-<section id="instructions" class="screen">
-
-    <div class="page-head">
-
-        <div class="small-logo">
-            VANTA
-        </div>
-
-        <h2>
-            قبل ما تبدأ
-        </h2>
-
-        <p>
-            اقرأ التعليمات التالية قبل إرسال طلبك
-        </p>
-
-    </div>
-
-
-    <div class="instruction-list">
-
-        <div class="instruction">
-            <b>01</b>
-
-            <div>
-                <strong>اختر الخدمة</strong>
+                <h1>
+                    نصنع فكرتك
+                    <br>
+                    <span>بطريقة مختلفة</span>
+                </h1>
 
                 <p>
-                    اختر الخدمة المناسبة لمشروعك.
+                    برمجة وتصميم وخدمات رقمية حسب طلبك
                 </p>
+
+                <button
+                    class="main-btn"
+                    onclick="goTo('instructions')"
+                >
+                    ابدأ الآن
+                </button>
+
             </div>
+
         </div>
 
+    </section>
 
-        <div class="instruction">
-            <b>02</b>
 
-            <div>
-                <strong>اكتب التفاصيل</strong>
+
+    <!-- =========================
+         INSTRUCTIONS
+    ========================= -->
+
+    <section id="instructions" class="screen">
+
+        <div class="instructions-container">
+
+            <div class="section-head">
+
+                <span class="section-label">
+                    VANTA ORDER GUIDE
+                </span>
+
+                <h2>
+                    تعليمات الطلب
+                </h2>
 
                 <p>
-                    وضح فكرتك ومتطلباتك بشكل دقيق.
+                    قبل إرسال طلبك، اقرأ الخطوات التالية عشان يكون طلبك واضح
+                    ونقدر نفهم فكرتك وننفذها بالشكل المطلوب.
                 </p>
+
             </div>
-        </div>
 
 
-        <div class="instruction">
-            <b>03</b>
 
-            <div>
-                <strong>أرفق الملفات</strong>
+            <div class="instructions-intro">
+
+                <h3>
+                    كيف يتم تنفيذ طلبك؟
+                </h3>
 
                 <p>
-                    أرسل الصور أو الأمثلة أو الملفات المهمة.
+                    في VANTA ما نعتمد على سعر ثابت للخدمات.
+                    أنت تحدد الميزانية اللي تناسبك، وترسل لنا فكرتك
+                    وتفاصيل المشروع، وبعدها يتم مراجعة الطلب وتحديد
+                    السعر النهائي وبدء التنفيذ بعد الاتفاق.
                 </p>
+
             </div>
-        </div>
 
 
-        <div class="instruction">
-            <b>04</b>
 
-            <div>
-                <strong>حدد الميزانية</strong>
+            <!-- STEPS -->
+
+            <div class="instruction-steps">
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            اختر الخدمة
+                        </h3>
+
+                        <p>
+                            اختر نوع الخدمة التي تحتاجها من الخدمات المتوفرة.
+                            سواء كنت تحتاج بوت ديسكورد، موقع، سيرفر ديسكورد،
+                            بنر، شعار، أو تصميم سيرفر حسب فكرتك الخاصة.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            اشرح فكرتك بالتفصيل
+                        </h3>
+
+                        <p>
+                            اكتب لنا وش تبي بالضبط، وكل التفاصيل المهمة
+                            في مشروعك. كل ما كانت فكرتك أوضح، كان أسهل علينا
+                            نفهم المطلوب ونجهز لك العمل بالشكل المناسب.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            أرسل أمثلة إذا عندك
+                        </h3>
+
+                        <p>
+                            إذا عندك صورة أو رابط أو تصميم مشابه للعمل
+                            اللي تبيه، حطه في خانة المرجع. هذا يساعدنا
+                            نفهم الشكل أو الأسلوب اللي تبيه بشكل أسرع.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            حدد سرعة التنفيذ
+                        </h3>
+
+                        <p>
+                            اختر السرعة المناسبة لك. تقدر تختار التنفيذ
+                            العادي أو المستعجل أو تخلي الموضوع حسب الاتفاق
+                            مع فريق VANTA.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        05
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            حدد ميزانيتك
+                        </h3>
+
+                        <p>
+                            اكتب السعر اللي يناسبك للخدمة.
+                            الميزانية تساعدنا نعرف نطاق العمل المناسب لك،
+                            وبعد مراجعة التفاصيل يتم تحديد السعر النهائي.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        06
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            راجع طلبك
+                        </h3>
+
+                        <p>
+                            قبل الإرسال راح تظهر لك جميع بيانات الطلب.
+                            راجع الخدمة والتفاصيل والميزانية والسرعة
+                            وتأكد أن كل شيء مكتوب بالشكل الصحيح.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        07
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            أرسل الطلب
+                        </h3>
+
+                        <p>
+                            بعد التأكد من جميع البيانات اضغط إرسال الطلب.
+                            راح يتم إنشاء رقم خاص لطلبك ويظهر لك مباشرة
+                            بعد نجاح الإرسال.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="instruction-step">
+
+                    <div class="step-number">
+                        08
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            متابعة الطلب
+                        </h3>
+
+                        <p>
+                            بعد إرسال الطلب، للاستفسار أو متابعة طلبك
+                            ادخل سيرفر الديسكورد وافتح تكت، واذكر رقم
+                            طلب VANTA الخاص بك للفريق المختص.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- IMPORTANT -->
+
+            <div class="important-box">
+
+                <h3>
+                    معلومات مهمة قبل إرسال الطلب
+                </h3>
+
+                <div class="important-list">
+
+
+                    <div class="important-item">
+                        <span>01</span>
+                        <div>
+                            تأكد من كتابة تفاصيل المشروع بشكل واضح وعدم ترك
+                            المعلومات الأساسية ناقصة.
+                        </div>
+                    </div>
+
+
+                    <div class="important-item">
+                        <span>02</span>
+                        <div>
+                            السعر الذي تكتبه هو ميزانيتك المقترحة وليس
+                            بالضرورة السعر النهائي للخدمة.
+                        </div>
+                    </div>
+
+
+                    <div class="important-item">
+                        <span>03</span>
+                        <div>
+                            إذا كانت الخدمة تحتاج معلومات إضافية،
+                            قد يطلب منك فريق VANTA تفاصيل أخرى قبل بدء التنفيذ.
+                        </div>
+                    </div>
+
+
+                    <div class="important-item">
+                        <span>04</span>
+                        <div>
+                            لا ترسل معلومات حساسة أو كلمات مرور أو رموز
+                            دخول خاصة بحساباتك داخل تفاصيل الطلب.
+                        </div>
+                    </div>
+
+
+                    <div class="important-item">
+                        <span>05</span>
+                        <div>
+                            إذا كان عندك مثال أو تصميم معين، أضف رابطه
+                            حتى نقدر نفهم المطلوب بشكل أدق.
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FLOW -->
+
+            <div class="flow-box">
+
+                <h3>
+                    مراحل طلبك باختصار
+                </h3>
+
+                <div class="flow">
+
+                    <div class="flow-item">
+                        اختيار الخدمة
+                    </div>
+
+                    <div class="flow-arrow">
+                        ←
+                    </div>
+
+                    <div class="flow-item">
+                        تفاصيل المشروع
+                    </div>
+
+                    <div class="flow-arrow">
+                        ←
+                    </div>
+
+                    <div class="flow-item">
+                        الميزانية
+                    </div>
+
+                    <div class="flow-arrow">
+                        ←
+                    </div>
+
+                    <div class="flow-item">
+                        مراجعة
+                    </div>
+
+                    <div class="flow-arrow">
+                        ←
+                    </div>
+
+                    <div class="flow-item">
+                        إرسال الطلب
+                    </div>
+
+                    <div class="flow-arrow">
+                        ←
+                    </div>
+
+                    <div class="flow-item">
+                        متابعة الطلب
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTION -->
+
+            <div class="instructions-action">
+
+                <h3>
+                    جاهز تبدأ؟
+                </h3>
 
                 <p>
-                    حدد الميزانية المناسبة لك.
+                    اختر الخدمة المناسبة لك وابدأ بتفاصيل مشروعك.
                 </p>
+
+                <button
+                    class="main-btn"
+                    onclick="goTo('services')"
+                >
+                    اختيار الخدمة
+                </button>
+
             </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
+    <section id="services" class="screen">
+
+        <div class="section-head">
+
+            <span class="section-label">
+                VANTA SERVICES
+            </span>
+
+            <h2>
+                اختر خدمتك
+            </h2>
+
+            <p>
+                اختر الخدمة التي تريد تنفيذها
+            </p>
+
         </div>
 
 
-        <div class="instruction">
-            <b>05</b>
+        <div class="service-grid">
 
-            <div>
-                <strong>المراجعة</strong>
+
+            <div
+                class="service-card"
+                onclick="chooseService('بوت ديسكورد')"
+            >
+
+                <div class="service-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    بوت ديسكورد
+                </h3>
 
                 <p>
-                    فريق VANTA يراجع طلبك.
+                    برمجة بوت ديسكورد حسب فكرتك واحتياج سيرفرك.
                 </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('بوت ديسكورد')"
+                >
+                    <span>اختيار الخدمة</span>
+                    <span>←</span>
+                </button>
+
             </div>
-        </div>
 
 
-        <div class="instruction">
-            <b>06</b>
 
-            <div>
-                <strong>السعر والتنفيذ</strong>
+            <div
+                class="service-card"
+                onclick="chooseService('موقع')"
+            >
+
+                <div class="service-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    موقع
+                </h3>
 
                 <p>
-                    يتم تحديد السعر ومدة التنفيذ قبل البدء.
+                    تصميم وبرمجة موقع احترافي خاص بمشروعك وفكرتك.
                 </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('موقع')"
+                >
+                    <span>اختيار الخدمة</span>
+                    <span>←</span>
+                </button>
+
             </div>
+
+
+
+            <div
+                class="service-card"
+                onclick="chooseService('سيرفر ديسكورد جاهز')"
+            >
+
+                <div class="service-icon">
+                    💜
+                </div>
+
+                <h3>
+                    سيرفر ديسكورد جاهز
+                </h3>
+
+                <p>
+                    سيرفر متكامل بالرومات والرتب والتنظيم والتجهيز.
+                </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('سيرفر ديسكورد جاهز')"
+                >
+                    <span>اختيار الخدمة</span>
+                    <span>←</span>
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="service-card"
+                onclick="chooseService('بنر')"
+            >
+
+                <div class="service-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    بنر
+                </h3>
+
+                <p>
+                    تصميم بنر احترافي يناسب هوية مشروعك واستخدامك.
+                </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('بنر')"
+                >
+                    <span>اختيار الخدمة</span>
+                    <span>←</span>
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="service-card"
+                onclick="chooseService('تصميم شعار')"
+            >
+
+                <div class="service-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    تصميم شعار
+                </h3>
+
+                <p>
+                    تصميم شعار خاص ومميز يعطي مشروعك هوية واضحة.
+                </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('تصميم شعار')"
+                >
+                    <span>اختيار الخدمة</span>
+                    <span>←</span>
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="service-card featured"
+                onclick="chooseService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
+            >
+
+                <div class="service-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    تصميم سيرفر ديسكورد
+                </h3>
+
+                <p>
+                    عندك فكرة خاصة؟ نحول فكرتك إلى سيرفر كامل
+                    على ذوقك واحتياج مشروعك.
+                </p>
+
+                <button
+                    class="service-select"
+                    onclick="event.stopPropagation(); chooseService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
+                >
+                    <span>ابدأ فكرتك</span>
+                    <span>←</span>
+                </button>
+
+            </div>
+
+
         </div>
 
-    </div>
-
-
-    <div class="warning">
-        ⚠️ لا ترسل كلمات المرور أو البيانات الخاصة.
-    </div>
-
-
-    <button
-        class="main-btn"
-        onclick="showScreen('services')"
-    >
-        🚀 ابدأ طلبك
-    </button>
-
-
-    <button
-        class="back-btn"
-        onclick="showScreen('home')"
-    >
-        رجوع
-    </button>
-
-</section>
+    </section>
 
 
 
-<!-- الخدمات -->
-<section id="services" class="screen">
+    <!-- =========================
+         DETAILS
+    ========================= -->
 
-    <div class="page-head">
+    <section id="details" class="screen">
 
-        <div class="small-logo">
-            VANTA
-        </div>
+        <div class="section-head">
 
-        <h2>
-            اختر الخدمة
-        </h2>
-
-        <p>
-            وش تحتاج نسوي لك؟
-        </p>
-
-    </div>
-
-
-    <div class="category-title">
-        SERVICES
-    </div>
-
-
-    <div class="service-grid">
-
-
-        <button
-            class="service"
-            onclick="selectService('بوت ديسكورد')"
-        >
-
-            <span class="service-icon">
-                🤖
+            <span class="section-label">
+                PROJECT DETAILS
             </span>
 
-            <strong>
-                بوت ديسكورد
-            </strong>
+            <h2>
+                تفاصيل مشروعك
+            </h2>
 
-            <small>
-                بوتات وأنظمة مخصصة
-            </small>
+            <p id="selectedServiceText">
+                الخدمة المختارة
+            </p>
 
-        </button>
+        </div>
 
 
-        <button
-            class="service"
-            onclick="selectService('موقع')"
-        >
+        <div class="details-form">
 
-            <span class="service-icon">
-                🌐
+            <label>
+                اسم المشروع
+            </label>
+
+            <input
+                id="projectName"
+                type="text"
+                placeholder="مثال: سيرفر VANTA"
+            >
+
+
+            <label>
+                وش تبي بالضبط؟
+            </label>
+
+            <textarea
+                id="description"
+                rows="6"
+                placeholder="اكتب فكرتك وتفاصيل طلبك هنا..."
+            ></textarea>
+
+
+            <label>
+                رابط أو مثال مشابه
+            </label>
+
+            <input
+                id="reference"
+                type="text"
+                placeholder="اختياري"
+            >
+
+
+            <label>
+                سرعة التنفيذ
+            </label>
+
+            <select id="speed">
+
+                <option value="">
+                    اختر السرعة
+                </option>
+
+                <option value="عادي">
+                    عادي
+                </option>
+
+                <option value="مستعجل">
+                    مستعجل
+                </option>
+
+                <option value="حسب الاتفاق">
+                    حسب الاتفاق
+                </option>
+
+            </select>
+
+
+            <div style="text-align:center">
+
+                <button
+                    class="main-btn"
+                    onclick="goToBudget()"
+                >
+                    التالي
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         BUDGET
+    ========================= -->
+
+    <section id="budget" class="screen">
+
+        <div class="section-head">
+
+            <span class="section-label">
+                YOUR BUDGET
             </span>
 
-            <strong>
-                موقع
-            </strong>
+            <h2>
+                كم ميزانيتك؟
+            </h2>
 
-            <small>
-                مواقع احترافية
-            </small>
+            <p>
+                اكتب السعر اللي يناسبك، وبعدها نحدد السعر النهائي
+                حسب تفاصيل الطلب.
+            </p>
 
-        </button>
+        </div>
 
 
-        <button
-            class="service"
-            onclick="selectService('سيرفر ديسكورد جاهز')"
-        >
+        <div class="budget-box">
 
-            <span class="service-icon">
-                🖥️
+            <input
+                id="budgetInput"
+                type="number"
+                min="1"
+                placeholder="مثال: 20"
+            >
+
+            <button
+                class="main-btn"
+                onclick="reviewOrder()"
+            >
+                مراجعة الطلب
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         REVIEW
+    ========================= -->
+
+    <section id="review" class="screen">
+
+        <div class="section-head">
+
+            <span class="section-label">
+                REVIEW
             </span>
 
-            <strong>
-                سيرفر ديسكورد جاهز
-            </strong>
+            <h2>
+                راجع طلبك
+            </h2>
 
-            <small>
-                سيرفر متكامل وجاهز
-            </small>
+            <p>
+                تأكد من البيانات قبل الإرسال.
+            </p>
 
-        </button>
-
-
-        <button
-            class="service"
-            onclick="selectService('بنر')"
-        >
-
-            <span class="service-icon">
-                🖼️
-            </span>
-
-            <strong>
-                بنر
-            </strong>
-
-            <small>
-                بنرات احترافية
-            </small>
-
-        </button>
-
-
-        <button
-            class="service"
-            onclick="selectService('تصميم شعار')"
-        >
-
-            <span class="service-icon">
-                ✦
-            </span>
-
-            <strong>
-                تصميم شعار
-            </strong>
-
-            <small>
-                شعار خاص بهوية مشروعك
-            </small>
-
-        </button>
-
-
-        <button
-            class="service"
-            onclick="selectService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
-        >
-
-            <span class="service-icon">
-                🎨
-            </span>
-
-            <strong>
-                تصميم سيرفر ديسكورد
-            </strong>
-
-            <small>
-                فكرة خاصة فيك
-            </small>
-
-        </button>
-
-    </div>
-
-
-    <button
-        class="back-btn"
-        onclick="showScreen('instructions')"
-    >
-        رجوع
-    </button>
-
-</section>
-
-
-
-<!-- التفاصيل -->
-<section id="details" class="screen">
-
-    <div class="page-head">
-
-        <div class="step">
-            02 / 06
         </div>
 
-        <h2>
-            تفاصيل المشروع
-        </h2>
 
-        <p id="selectedServiceText"></p>
+        <div class="review-box">
 
-    </div>
+            <div class="review-row">
+                <span>الخدمة</span>
+                <strong id="reviewService">-</strong>
+            </div>
 
+            <div class="review-row">
+                <span>المشروع</span>
+                <strong id="reviewProject">-</strong>
+            </div>
 
-    <label>
-        اسم المشروع
-    </label>
+            <div class="review-row">
+                <span>التفاصيل</span>
+                <strong id="reviewDescription">-</strong>
+            </div>
 
-    <input
-        id="projectName"
-        type="text"
-        placeholder="مثال: Dominion RP"
-    >
+            <div class="review-row">
+                <span>المرجع</span>
+                <strong id="reviewReference">-</strong>
+            </div>
 
+            <div class="review-row">
+                <span>السرعة</span>
+                <strong id="reviewSpeed">-</strong>
+            </div>
 
-    <label>
-        وش تبي نسوي لك؟
-    </label>
+            <div class="review-row">
+                <span>الميزانية</span>
+                <strong id="reviewBudget">-</strong>
+            </div>
 
-    <textarea
-        id="description"
-        placeholder="اكتب فكرتك ومتطلباتك بالتفصيل..."
-    ></textarea>
-
-
-    <label>
-        مثال أو رابط يساعدنا
-    </label>
-
-    <input
-        id="reference"
-        type="text"
-        placeholder="اختياري"
-    >
-
-
-    <label>
-        سرعة التنفيذ
-    </label>
-
-    <select id="speed">
-
-        <option value="عادي">
-            عادي
-        </option>
-
-        <option value="مستعجل">
-            مستعجل
-        </option>
-
-        <option value="حسب المشروع">
-            حسب المشروع
-        </option>
-
-    </select>
-
-
-    <button
-        class="main-btn"
-        onclick="goBudget()"
-    >
-        التالي
-    </button>
-
-
-    <button
-        class="back-btn"
-        onclick="showScreen('services')"
-    >
-        رجوع
-    </button>
-
-</section>
-
-
-
-<!-- الميزانية -->
-<section id="budget" class="screen">
-
-    <div class="page-head">
-
-        <div class="step">
-            04 / 06
         </div>
 
-        <h2>
-            الميزانية
-        </h2>
 
-        <p>
-            حدد الميزانية المناسبة لمشروعك
-        </p>
+        <div style="text-align:center">
 
-    </div>
+            <button
+                id="sendOrderBtn"
+                class="main-btn"
+                onclick="submitOrder()"
+            >
+                إرسال الطلب
+            </button>
 
-
-    <div class="budget-grid">
-
-        <button onclick="selectBudget('أقل من 10 د.ك')">
-            أقل من 10 د.ك
-        </button>
-
-        <button onclick="selectBudget('10 - 25 د.ك')">
-            10 - 25 د.ك
-        </button>
-
-        <button onclick="selectBudget('25 - 50 د.ك')">
-            25 - 50 د.ك
-        </button>
-
-        <button onclick="selectBudget('50 - 100 د.ك')">
-            50 - 100 د.ك
-        </button>
-
-        <button onclick="selectBudget('100+ د.ك')">
-            100+ د.ك
-        </button>
-
-        <button onclick="selectBudget('غير محدد')">
-            غير محدد
-        </button>
-
-    </div>
-
-
-    <button
-        class="main-btn"
-        onclick="reviewOrder()"
-    >
-        👀 مراجعة الطلب
-    </button>
-
-
-    <button
-        class="back-btn"
-        onclick="showScreen('details')"
-    >
-        رجوع
-    </button>
-
-</section>
-
-
-
-<!-- المراجعة -->
-<section id="review" class="screen">
-
-    <div class="page-head">
-
-        <div class="step">
-            05 / 06
         </div>
 
-        <h2>
-            راجع طلبك
-        </h2>
-
-        <p>
-            تأكد من البيانات قبل الإرسال
-        </p>
-
-    </div>
-
-
-    <div class="review-box">
-
-        <div>
-            <span>الخدمة</span>
-            <strong id="reviewService"></strong>
-        </div>
-
-        <div>
-            <span>اسم المشروع</span>
-            <strong id="reviewProject"></strong>
-        </div>
-
-        <div>
-            <span>التفاصيل</span>
-            <strong id="reviewDescription"></strong>
-        </div>
-
-        <div>
-            <span>المرجع</span>
-            <strong id="reviewReference"></strong>
-        </div>
-
-        <div>
-            <span>الميزانية</span>
-            <strong id="reviewBudget"></strong>
-        </div>
-
-        <div>
-            <span>السرعة</span>
-            <strong id="reviewSpeed"></strong>
-        </div>
-
-    </div>
-
-
-    <button
-        id="sendOrderBtn"
-        class="main-btn"
-        onclick="submitOrder()"
-    >
-        📨 إرسال الطلب
-    </button>
-
-
-    <button
-        class="back-btn"
-        onclick="showScreen('budget')"
-    >
-        تعديل
-    </button>
-
-</section>
+    </section>
 
 
 
-<!-- نجاح الطلب -->
-<section id="success" class="screen">
+    <!-- =========================
+         SUCCESS
+    ========================= -->
 
-    <div class="success">
+    <section id="success" class="screen">
 
-        <div class="success-icon">
-            ✓
-        </div>
+        <div class="success-box">
 
-        <div class="badge">
-            ORDER CREATED
-        </div>
+            <div class="success-icon">
+                ✓
+            </div>
 
-        <h2>
-            تم إرسال طلبك
-        </h2>
+            <div class="section-label">
+                VANTA ORDER
+            </div>
 
-        <p>
-            تم استلام طلبك بنجاح وسيقوم فريق VANTA
-            بمراجعته.
-        </p>
+            <h2>
+                تم إرسال طلبك
+            </h2>
 
+            <p>
+                رقم طلبك
+            </p>
 
-        <div class="order-number">
-
-            <span>
-                رقم الطلب
-            </span>
-
-            <strong id="orderId">
+            <div
+                id="orderId"
+                class="order-number"
+            >
                 VANTA-00000
-            </strong>
+            </div>
+
+            <p id="successMessage">
+                للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت
+            </p>
+
+            <a
+                id="discordButton"
+                href="https://discord.gg/hMUXdaf58"
+                target="_blank"
+                class="main-btn"
+            >
+                دخول سيرفر الديسكورد
+            </a>
+
+            <button
+                class="secondary-btn"
+                onclick="resetOrder()"
+            >
+                طلب جديد
+            </button>
 
         </div>
 
+    </section>
 
-        <div class="status">
-            🟡 بانتظار المراجعة
-        </div>
-
-
-        <p id="successMessage">
-            📨 للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت
-        </p>
-
-
-        <a
-            class="main-btn"
-            href="https://discord.gg/hMUXdaf58"
-            target="_blank"
-        >
-            دخول سيرفر Discord
-        </a>
-
-
-        <button
-            class="back-btn"
-            onclick="location.reload()"
-        >
-            العودة للرئيسية
-        </button>
-
-    </div>
-
-</section>
 
 </main>
 
 
 
-<footer class="vanta-footer">
+<!-- =========================
+     FOOTER
+========================= -->
 
-    <div>
+<footer>
+
+    <div class="footer-title">
         التواصل مع الجهة المختصة
     </div>
 
-    <a
-        href="https://wa.me/96598775651"
-        target="_blank"
-    >
-        WhatsApp — 98775651
-    </a>
+    <div class="whatsapp-contacts">
+
+        <a
+            class="whatsapp-button"
+            href="https://wa.me/96598775651"
+            target="_blank"
+        >
+            واتساب 1
+        </a>
+
+        <a
+            class="whatsapp-button"
+            href="https://wa.me/96596729882"
+            target="_blank"
+        >
+            واتساب 2
+        </a>
+
+    </div>
+
+    <p>
+        VANTA © 2026
+    </p>
 
 </footer>
 
 
-<script src="app.js"></script>
+
+<script>
+
+let order = {
+    service: "",
+    projectName: "",
+    description: "",
+    reference: "",
+    speed: "",
+    budget: ""
+};
+
+
+function goTo(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    const target =
+        document.getElementById(id);
+
+    if (target) {
+
+        target.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+function chooseService(service) {
+
+    order.service = service;
+
+    const text =
+        document.getElementById(
+            "selectedServiceText"
+        );
+
+    if (text) {
+
+        text.textContent =
+            "الخدمة المختارة: " + service;
+
+    }
+
+    goTo("details");
+
+}
+
+
+function goToBudget() {
+
+    const projectName =
+        document
+            .getElementById("projectName")
+            .value
+            .trim();
+
+    const description =
+        document
+            .getElementById("description")
+            .value
+            .trim();
+
+    const reference =
+        document
+            .getElementById("reference")
+            .value
+            .trim();
+
+    const speed =
+        document
+            .getElementById("speed")
+            .value;
+
+
+    if (!projectName) {
+
+        alert("اكتب اسم المشروع");
+
+        return;
+    }
+
+
+    if (!description) {
+
+        alert("اكتب تفاصيل المشروع");
+
+        return;
+    }
+
+
+    order.projectName =
+        projectName;
+
+    order.description =
+        description;
+
+    order.reference =
+        reference;
+
+    order.speed =
+        speed || "غير محدد";
+
+
+    goTo("budget");
+
+}
+
+
+function reviewOrder() {
+
+    const budget =
+        document
+            .getElementById("budgetInput")
+            .value
+            .trim();
+
+
+    if (!budget) {
+
+        alert("حدد السعر اللي يناسبك");
+
+        return;
+    }
+
+
+    if (Number(budget) <= 0) {
+
+        alert("اكتب ميزانية صحيحة");
+
+        return;
+    }
+
+
+    order.budget =
+        budget;
+
+
+    document
+        .getElementById("reviewService")
+        .textContent =
+        order.service;
+
+
+    document
+        .getElementById("reviewProject")
+        .textContent =
+        order.projectName;
+
+
+    document
+        .getElementById("reviewDescription")
+        .textContent =
+        order.description;
+
+
+    document
+        .getElementById("reviewReference")
+        .textContent =
+        order.reference || "لا يوجد";
+
+
+    document
+        .getElementById("reviewSpeed")
+        .textContent =
+        order.speed;
+
+
+    document
+        .getElementById("reviewBudget")
+        .textContent =
+        order.budget + " KWD";
+
+
+    goTo("review");
+
+}
+
+
+async function submitOrder() {
+
+    const button =
+        document.getElementById(
+            "sendOrderBtn"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "جاري إرسال الطلب...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/orders",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            service:
+                                order.service,
+
+                            projectName:
+                                order.projectName,
+
+                            description:
+                                order.description,
+
+                            reference:
+                                order.reference,
+
+                            speed:
+                                order.speed,
+
+                            budget:
+                                order.budget
+
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "فشل إرسال الطلب"
+            );
+
+        }
+
+
+        const orderId =
+            data.orderId ||
+            data.order?.orderId ||
+            "VANTA-" +
+            Math.floor(
+                10000 +
+                Math.random() * 90000
+            );
+
+
+        document
+            .getElementById("orderId")
+            .textContent =
+            orderId;
+
+
+        document
+            .getElementById(
+                "successMessage"
+            )
+            .textContent =
+            "للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت";
+
+
+        goTo("success");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "صار خطأ أثناء إرسال الطلب، حاول مرة ثانية."
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "إرسال الطلب";
+
+    }
+
+}
+
+
+function resetOrder() {
+
+    order = {
+        service: "",
+        projectName: "",
+        description: "",
+        reference: "",
+        speed: "",
+        budget: ""
+    };
+
+
+    document
+        .getElementById("projectName")
+        .value = "";
+
+    document
+        .getElementById("description")
+        .value = "";
+
+    document
+        .getElementById("reference")
+        .value = "";
+
+    document
+        .getElementById("speed")
+        .value = "";
+
+    document
+        .getElementById("budgetInput")
+        .value = "";
+
+
+    const button =
+        document.getElementById(
+            "sendOrderBtn"
+        );
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "إرسال الطلب";
+
+
+    goTo("services");
+
+}
+
+</script>
+
 
 </body>
 </html>
