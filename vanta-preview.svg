@@ -1,1 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07070a"/>
+      <stop offset="55%" stop-color="#120d1d"/>
+      <stop offset="100%" stop-color="#050507"/>
+    </linearGradient>
 
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#9b5cff" stop-opacity=".75"/>
+      <stop offset="100%" stop-color="#9b5cff" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c084ff"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="45"/>
+    </filter>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="15" stdDeviation="20" flood-opacity=".5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" rx="35" fill="url(#bg)"/>
+
+  <!-- Purple lighting -->
+  <ellipse cx="250" cy="320" rx="300" ry="250"
+           fill="url(#glow)" filter="url(#blur)"/>
+  <ellipse cx="1000" cy="330" rx="300" ry="250"
+           fill="url(#glow)" filter="url(#blur)"/>
+
+  <!-- V logo -->
+  <g transform="translate(65 55)">
+    <circle cx="45" cy="45" r="45" fill="#111116"
+            stroke="#914cff" stroke-width="2"/>
+    <path d="M20 25 L45 70 L70 25"
+          fill="none" stroke="url(#purple)"
+          stroke-width="10" stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="70" y="170"
+        fill="#ffffff"
+        font-family="Arial, sans-serif"
+        font-size="58"
+        font-weight="800">
+    VANTA
+  </text>
+
+  <text x="72" y="215"
+        fill="#b98aff"
+        font-family="Arial, sans-serif"
+        font-size="25"
+        font-weight="600">
+    نصنع فكرتك بطريقة مختلفة
+  </text>
+
+  <!-- Mascot -->
+  <g transform="translate(125 260)" filter="url(#shadow)">
+    <circle cx="135" cy="135" r="120" fill="#17131f"
+            stroke="#8b45ff" stroke-width="5"/>
+
+    <!-- Face -->
+    <circle cx="135" cy="135" r="88" fill="#f4f4f7"/>
+
+    <!-- Hair -->
+    <path d="M65 105 Q80 25 145 48 Q210 25 225 105
+             Q190 80 135 90 Q100 78 65 105"
+          fill="#17131f"/>
+
+    <!-- Eyes -->
+    <path d="M95 130 Q108 142 121 130"
+          fill="none" stroke="#15151a" stroke-width="7"
+          stroke-linecap="round"/>
+
+    <path d="M151 130 Q166 118 181 130"
+          fill="none" stroke="#15151a" stroke-width="7"
+          stroke-linecap="round"/>
+
+    <!-- Smile -->
+    <path d="M120 165 Q135 178 151 165"
+          fill="none" stroke="#15151a" stroke-width="6"
+          stroke-linecap="round"/>
+
+    <!-- V mark -->
+    <path d="M115 195 L135 220 L155 195"
+          fill="none" stroke="#914cff"
+          stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Stars -->
+    <text x="0" y="55" font-size="35" fill="#b978ff">✦</text>
+    <text x="235" y="75" font-size="30" fill="#ffffff">✦</text>
+    <text x="245" y="205" font-size="28" fill="#a855f7">✦</text>
+  </g>
+
+  <!-- Right panel -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="75" width="520" height="480"
+          rx="35" fill="#111017"
+          stroke="#7c3aed" stroke-opacity=".65"
+          stroke-width="2"/>
+
+    <rect x="620" y="95" width="480" height="440"
+          rx="28" fill="#0b0a0f"
+          opacity=".75"/>
+  </g>
+
+  <!-- Right title -->
+  <text x="860" y="175"
+        text-anchor="middle"
+        fill="#ffffff"
+        font-family="Arial, sans-serif"
+        font-size="48"
+        font-weight="800">
+    اطلب طلبك
+  </text>
+
+  <text x="860" y="220"
+        text-anchor="middle"
+        fill="#c9a7ff"
+        font-family="Arial, sans-serif"
+        font-size="28"
+        font-weight="600">
+    للشراء افتح تذكرة
+  </text>
+
+  <!-- Ticket -->
+  <g transform="translate(755 255)">
+    <rect x="0" y="0" width="210" height="125"
+          rx="25" fill="url(#purple)"
+          filter="url(#shadow)"/>
+
+    <path d="M35 42 L175 42 L175 85 L35 85 Z"
+          fill="#ffffff" opacity=".95"/>
+
+    <path d="M75 42 L95 85 L115 42"
+          fill="none" stroke="#7c3aed"
+          stroke-width="7"
+          stroke-linecap="round"/>
+
+    <text x="105" y="115"
+          text-anchor="middle"
+          font-family="Arial"
+          font-size="18"
+          font-weight="700"
+          fill="#ffffff">
+      VANTA
+    </text>
+  </g>
+
+  <!-- Bottom icons -->
+  <g transform="translate(680 450)" fill="#ffffff">
+    <circle cx="35" cy="35" r="32" fill="#17121f"
+            stroke="#7c3aed"/>
+    <text x="35" y="45" text-anchor="middle" font-size="27">🛒</text>
+
+    <circle cx="120" cy="35" r="32" fill="#17121f"
+            stroke="#7c3aed"/>
+    <text x="120" y="45" text-anchor="middle" font-size="27">💳</text>
+
+    <circle cx="205" cy="35" r="32" fill="#17121f"
+            stroke="#7c3aed"/>
+    <text x="205" y="45" text-anchor="middle" font-size="27">🔒</text>
+
+    <circle cx="290" cy="35" r="32" fill="#17121f"
+            stroke="#7c3aed"/>
+    <text x="290" y="45" text-anchor="middle" font-size="27">🎟</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="860" y="515"
+        text-anchor="middle"
+        fill="#8d8998"
+        font-family="Arial, sans-serif"
+        font-size="17">
+    Discord Services • Websites • Bots • Designs
+  </text>
+</svg>
