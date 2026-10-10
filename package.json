@@ -1,10 +1,13 @@
 {
   "name": "vanta-store",
   "version": "1.0.0",
-  "description": "VANTA Discord Services & Programming Store",
+  "description": "VANTA Digital Studio",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "express": "^4.21.2"
