@@ -1,2226 +1,357 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>VANTA — خدمات رقمية</title>
-    <meta name="description" content="VANTA للخدمات الرقمية والبرمجة والتصميم">
-
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        button,
-        input,
-        textarea,
-        select {
-            font-family: inherit;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 5%;
-        }
-
-        .logo span {
-            font-size: 24px;
-            font-weight: 950;
-            letter-spacing: 2px;
-        }
-
-        .discord-top {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 22px;
-            border-radius: 13px;
-            text-decoration: none;
-            color: white;
-            background: #5865F2;
-            font-weight: 800;
-            transition: .2s;
-        }
-
-        .discord-top:hover {
-            transform: translateY(-2px);
-        }
-
-        .screen {
-            display: none;
-            min-height: 75vh;
-            padding: 70px 5%;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        .hero {
-            min-height: 75vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 850px;
-        }
-
-        .hero h1 {
-            font-size: clamp(45px, 7vw, 85px);
-            line-height: 1.05;
-            margin: 20px 0;
-            font-weight: 950;
-        }
-
-        .hero h1 span {
-            color: #9b6cff;
-        }
-
-        .hero p {
-            color: #999;
-            font-size: 18px;
-            margin-bottom: 35px;
-        }
-
-        .section-label {
-            color: #a276ff;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 3px;
-        }
-
-        .section-head {
-            max-width: 900px;
-            margin: 0 auto 45px;
-            text-align: center;
-        }
-
-        .section-head h2 {
-            font-size: 40px;
-            font-weight: 950;
-            margin: 12px 0;
-        }
-
-        .section-head p {
-            color: #999;
-            font-size: 16px;
-            line-height: 1.9;
-        }
-
-        .main-btn {
-            border: 0;
-            padding: 17px 35px;
-            min-width: 230px;
-            border-radius: 15px;
-            color: white;
-            background: linear-gradient(135deg, #8b5cf6, #6d3df5);
-            font-size: 16px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 12px 35px rgba(111,61,245,.25);
-            transition: .2s;
-        }
-
-        .main-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 45px rgba(111,61,245,.4);
-        }
-
-        .main-btn:disabled {
-            opacity: .6;
-            cursor: not-allowed;
-        }
-
-        .instructions-container {
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .instructions-intro,
-        .important-box,
-        .flow-box {
-            padding: 30px;
-            margin-bottom: 25px;
-            border-radius: 24px;
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(139,92,246,.10),
-                    rgba(255,255,255,.025)
-                );
-            border: 1px solid rgba(139,92,246,.18);
-        }
-
-        .instructions-intro h3,
-        .important-box h3,
-        .flow-box h3 {
-            margin: 0 0 12px;
-            font-size: 23px;
-        }
-
-        .instructions-intro p {
-            margin: 0;
-            color: #aaa;
-            line-height: 2;
-        }
-
-        .instruction-steps {
-            display: grid;
-            gap: 16px;
-            margin-bottom: 25px;
-        }
-
-        .instruction-step {
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 25px;
-            border-radius: 22px;
-            background: rgba(255,255,255,.025);
-            border: 1px solid rgba(255,255,255,.07);
-            transition: .2s;
-        }
-
-        .instruction-step:hover {
-            transform: translateY(-3px);
-            border-color: rgba(139,92,246,.35);
-        }
-
-        .step-number {
-            flex-shrink: 0;
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            color: white;
-            background: linear-gradient(135deg,#8b5cf6,#6d3df5);
-            font-size: 17px;
-            font-weight: 950;
-        }
-
-        .step-content h3 {
-            margin: 0 0 8px;
-            font-size: 19px;
-        }
-
-        .step-content p {
-            margin: 0;
-            color: #999;
-            line-height: 1.9;
-            font-size: 14px;
-        }
-
-        .important-list {
-            display: grid;
-            gap: 13px;
-        }
-
-        .important-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            color: #aaa;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        .important-item span {
-            color: #a276ff;
-            font-weight: 950;
-        }
-
-        .flow {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .flow-item {
-            padding: 12px 16px;
-            border-radius: 12px;
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(255,255,255,.07);
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .flow-arrow {
-            color: #8b5cf6;
-            font-weight: 950;
-        }
-
-        .instructions-action {
-            margin-top: 35px;
-            padding: 35px;
-            text-align: center;
-            border-radius: 26px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(139,92,246,.12),
-                    rgba(109,61,245,.04)
-                );
-            border: 1px solid rgba(139,92,246,.2);
-        }
-
-        .instructions-action h3 {
-            margin: 0 0 10px;
-            font-size: 24px;
-        }
-
-        .instructions-action p {
-            margin: 0 0 25px;
-            color: #999;
-        }
-
-        #services {
-            max-width: 1350px;
-            margin: auto;
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-
-        .service-card {
-            position: relative;
-            min-height: 355px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            border-radius: 26px;
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(28,28,38,.98),
-                    rgba(12,12,17,.98)
-                );
-            border: 1px solid rgba(255,255,255,.08);
-            cursor: pointer;
-            overflow: hidden;
-            transition: .25s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(151,104,255,.65);
-            box-shadow: 0 20px 55px rgba(100,50,220,.18);
-        }
-
-        .service-card.featured {
-            border-color: rgba(151,104,255,.35);
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(40,25,65,.98),
-                    rgba(12,12,17,.98)
-                );
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            border-radius: 20px;
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(139,92,246,.18),
-                    rgba(139,92,246,.05)
-                );
-            border: 1px solid rgba(155,110,255,.2);
-            font-size: 34px;
-        }
-
-        .service-card h3 {
-            margin: 0 0 12px;
-            font-size: 21px;
-            font-weight: 950;
-        }
-
-        .service-card p {
-            margin: 0;
-            color: #999;
-            line-height: 1.8;
-            font-size: 14px;
-        }
-
-        .service-select {
-            width: 100%;
-            margin-top: auto;
-            padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(160,110,255,.3);
-            border-radius: 15px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(139,92,246,.2),
-                    rgba(110,60,220,.1)
-                );
-            color: white;
-            font-size: 15px;
-            font-weight: 950;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .service-select:hover {
-            background: linear-gradient(135deg,#8b5cf6,#6d3df5);
-            border-color: transparent;
-            box-shadow: 0 10px 30px rgba(110,60,245,.25);
-        }
-
-        .details-form {
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .details-form label {
-            display: block;
-            margin-bottom: 9px;
-            font-size: 14px;
-            font-weight: 800;
-        }
-
-        .details-form input,
-        .details-form textarea,
-        .details-form select,
-        .budget-box input {
-            width: 100%;
-            margin-bottom: 22px;
-            padding: 16px 18px;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 15px;
-            outline: none;
-            color: white;
-            background: rgba(255,255,255,.04);
-            font-size: 15px;
-        }
-
-        .details-form textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .budget-box {
-            max-width: 550px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .currency-label {
-            color: #a276ff;
-            font-size: 14px;
-            font-weight: 900;
-            margin-top: -8px;
-            margin-bottom: 18px;
-        }
-
-        .review-box {
-            max-width: 800px;
-            margin: 0 auto 30px;
-            padding: 10px 25px;
-            border-radius: 22px;
-            background: rgba(255,255,255,.03);
-            border: 1px solid rgba(255,255,255,.08);
-        }
-
-        .review-row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(255,255,255,.06);
-        }
-
-        .review-row:last-child {
-            border-bottom: 0;
-        }
-
-        .review-row span {
-            color: #888;
-        }
-
-        .review-row strong {
-            max-width: 65%;
-            text-align: left;
-            word-break: break-word;
-        }
-
-        .success-box {
-            max-width: 650px;
-            margin: 50px auto;
-            padding: 45px 30px;
-            text-align: center;
-            border-radius: 28px;
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(30,30,40,.98),
-                    rgba(12,12,17,.98)
-                );
-            border: 1px solid rgba(139,92,246,.25);
-        }
-
-        .success-icon {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: white;
-            background: linear-gradient(135deg,#8b5cf6,#6d3df5);
-            font-size: 34px;
-            font-weight: 900;
-        }
-
-        .success-box h2 {
-            font-size: 32px;
-            margin: 15px 0;
-        }
-
-        .order-number {
-            margin: 20px 0;
-            padding: 18px;
-            border-radius: 15px;
-            background: rgba(139,92,246,.1);
-            color: #b18aff;
-            font-size: 22px;
-            font-weight: 950;
-        }
-
-        .success-box p {
-            color: #999;
-            line-height: 1.8;
-        }
-
-        .secondary-btn {
-            display: block;
-            margin: 15px auto 0;
-            padding: 14px 25px;
-            border: 1px solid rgba(255,255,255,.1);
-            border-radius: 14px;
-            color: white;
-            background: rgba(255,255,255,.04);
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        footer {
-            padding: 45px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,.06);
-        }
-
-        .footer-title {
-            font-weight: 900;
-            font-size: 17px;
-        }
-
-        .whatsapp-contacts {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .whatsapp-button {
-            min-width: 190px;
-            padding: 14px 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            background: rgba(255,255,255,.04);
-            border: 1px solid rgba(255,255,255,.08);
-            font-weight: 900;
-            transition: .2s;
-        }
-
-        .whatsapp-button:hover {
-            transform: translateY(-3px);
-            border-color: rgba(139,92,246,.5);
-        }
-
-        footer p {
-            color: #666;
-            font-size: 13px;
-            margin-top: 25px;
-        }
-
-        /* =========================
-           COUNTRY MODAL
-        ========================= */
-
-        #vantaCountryModal {
-            position: fixed;
-            inset: 0;
-            z-index: 999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0,0,0,.88);
-            backdrop-filter: blur(15px);
-        }
-
-        .country-modal-box {
-            width: min(430px, 100%);
-            padding: 32px;
-            text-align: center;
-            border-radius: 26px;
-            background:
-                linear-gradient(
-                    145deg,
-                    #18131f,
-                    #09080d
-                );
-            border: 1px solid rgba(155,108,255,.4);
-            box-shadow: 0 0 60px rgba(110,50,255,.2);
-        }
-
-        .country-logo {
-            color: #a276ff;
-            font-size: 30px;
-            font-weight: 950;
-            letter-spacing: 5px;
-            margin-bottom: 15px;
-        }
-
-        .country-modal-box h2 {
-            margin: 0 0 10px;
-            font-size: 25px;
-        }
-
-        .country-modal-box p {
-            color: #999;
-            margin: 0 0 22px;
-            font-size: 14px;
-        }
-
-        #countrySelect {
-            width: 100%;
-            height: 54px;
-            padding: 0 15px;
-            margin-bottom: 15px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,.12);
-            outline: none;
-            background: #0e0b13;
-            color: white;
-            font-size: 15px;
-        }
-
-        #countrySelect:focus {
-            border-color: #9b6cff;
-        }
-
-        #countryConfirm {
-            width: 100%;
-        }
-
-        #countryChangeButton {
-            position: fixed;
-            left: 18px;
-            bottom: 18px;
-            z-index: 99990;
-            padding: 11px 16px;
-            border-radius: 14px;
-            border: 1px solid rgba(155,108,255,.35);
-            background: rgba(12,10,16,.95);
-            color: white;
-            cursor: pointer;
-            font-weight: 900;
-            box-shadow: 0 8px 25px rgba(0,0,0,.35);
-        }
-
-        #countryChangeButton:hover {
-            border-color: #9b6cff;
-        }
-
-        @media (max-width: 900px) {
-            .service-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 650px) {
-            .screen {
-                padding: 50px 18px;
-            }
-
-            .navbar {
-                padding: 16px 18px;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .section-head h2 {
-                font-size: 30px;
-            }
-
-            .service-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .instruction-step {
-                padding: 20px;
-            }
-
-            .flow {
-                flex-direction: column;
-            }
-
-            .flow-arrow {
-                transform: rotate(90deg);
-            }
-
-            .review-row {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .review-row strong {
-                max-width: 100%;
-                text-align: right;
-            }
-
-            .whatsapp-button {
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="VANTA — نصنع فكرتك بطريقة مختلفة. خدمات برمجة وتصميم رقمية احترافية.">
+  <title>VANTA | فكرتك تبدأ من هنا</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="navbar">
-    <div class="logo">
-        <span>VANTA</span>
-    </div>
+  <a class="brand" href="#" onclick="showScreen('home');return false">
+    <span class="brand-icon">V</span>
+    <span class="brand-name">VANTA<small>DIGITAL STUDIO</small></span>
+  </a>
 
-    <a
-        href="https://discord.gg/hMUXdaf58"
-        target="_blank"
-        class="discord-top"
-    >
-        ديسكورد
-    </a>
+  <nav class="nav-links">
+    <button onclick="showScreen('home')">الرئيسية</button>
+    <button onclick="showScreen('services')">الخدمات</button>
+    <button onclick="showScreen('track')">متابعة الطلب</button>
+  </nav>
+
+  <a class="discord-btn" href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">
+    ديسكورد ↗
+  </a>
 </header>
 
 <main>
 
-    <!-- HOME -->
+  <!-- الرئيسية -->
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        استوديو VANTA الرقمي
+      </div>
 
-    <section id="home" class="screen active">
+      <h1>
+        فكرتك تبدأ<br>
+        <span>من هنا.</span>
+      </h1>
 
-        <div class="hero">
+      <p class="hero-description">
+        نصنع فكرتك بطريقة مختلفة من خلال البرمجة والتصميم
+        ونبني لك تجربة رقمية تليق بطموحك.
+      </p>
 
-            <div class="hero-content">
+      <div class="hero-buttons">
+        <button class="main-btn" onclick="showScreen('services')">
+          اكتشف خدماتنا <span>←</span>
+        </button>
 
-                <div class="section-label">
-                    VANTA DIGITAL
-                </div>
+        <button class="secondary-btn" onclick="showScreen('instructions')">
+          كيف تطلب؟
+        </button>
+      </div>
 
-                <h1>
-                    نصنع فكرتك
-                    <br>
-                    <span>بطريقة مختلفة</span>
-                </h1>
+      <div class="hero-footer">
+        <span class="hero-line"></span>
+        <span>إبداع • برمجة • تصميم</span>
+      </div>
 
-                <p>
-                    برمجة وتصميم وخدمات رقمية حسب طلبك
-                </p>
+      <div class="hero-decoration">
+        <div class="decoration-circle circle-one"></div>
+        <div class="decoration-circle circle-two"></div>
+        <div class="decoration-v">V</div>
+      </div>
+    </div>
 
-                <button
-                    class="main-btn"
-                    onclick="goTo('instructions')"
-                >
-                    ابدأ الآن
-                </button>
+    <div class="section-heading">
+      <span class="section-label">WHY VANTA</span>
+      <h2>ليش تختار <span>VANTA؟</span></h2>
+      <p>نهتم بالتفاصيل من أول فكرة إلى آخر خطوة.</p>
+    </div>
 
-            </div>
+    <div class="features-grid">
+      <article class="feature-card">
+        <div class="feature-icon">✦</div>
+        <h3>تصميم مختلف</h3>
+        <p>هوية بصرية وواجهات تعكس شخصية مشروعك.</p>
+      </article>
 
+      <article class="feature-card">
+        <div class="feature-icon">⌘</div>
+        <h3>تنفيذ مخصص</h3>
+        <p>نبني الخدمات حسب احتياجك وتفاصيل فكرتك.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">↗</div>
+        <h3>تواصل واضح</h3>
+        <p>تابع حالة طلبك وتواصل معنا عند الحاجة.</p>
+      </article>
+    </div>
+
+    <div class="cta-banner">
+      <div>
+        <span class="section-label">YOUR NEXT PROJECT</span>
+        <h2>عندك فكرة؟ خلنا نبدأ.</h2>
+        <p>أرسل تفاصيل مشروعك ونساعدك تحولها إلى واقع.</p>
+      </div>
+      <button class="main-btn" onclick="showScreen('services')">ابدأ مشروعك ←</button>
+    </div>
+  </section>
+
+  <!-- طريقة الطلب -->
+  <section id="instructions" class="screen">
+    <div class="page-heading">
+      <span class="section-label">HOW IT WORKS</span>
+      <h1>طريقة <span>الطلب</span></h1>
+      <p>خطوات بسيطة تفصل فكرتك عن التنفيذ.</p>
+    </div>
+
+    <div class="steps-list">
+      <article class="step-card">
+        <span class="step-number">01</span>
+        <div>
+          <h3>اختر الخدمة</h3>
+          <p>حدد الخدمة المناسبة لمشروعك.</p>
         </div>
+      </article>
 
-    </section>
-
-
-    <!-- INSTRUCTIONS -->
-
-    <section id="instructions" class="screen">
-
-        <div class="instructions-container">
-
-            <div class="section-head">
-
-                <span class="section-label">
-                    VANTA ORDER GUIDE
-                </span>
-
-                <h2>
-                    تعليمات الطلب
-                </h2>
-
-                <p>
-                    قبل إرسال طلبك، اقرأ الخطوات التالية عشان يكون طلبك واضح
-                    ونقدر نفهم فكرتك وننفذها بالشكل المطلوب.
-                </p>
-
-            </div>
-
-            <div class="instructions-intro">
-
-                <h3>
-                    كيف يتم تنفيذ طلبك؟
-                </h3>
-
-                <p>
-                    في VANTA ما نعتمد على سعر ثابت للخدمات.
-                    أنت تحدد الميزانية اللي تناسبك، وترسل لنا فكرتك
-                    وتفاصيل المشروع، وبعدها يتم مراجعة الطلب وتحديد
-                    السعر النهائي وبدء التنفيذ بعد الاتفاق.
-                </p>
-
-            </div>
-
-            <div class="instruction-steps">
-
-                <div class="instruction-step">
-                    <div class="step-number">01</div>
-
-                    <div class="step-content">
-                        <h3>اختر الخدمة</h3>
-
-                        <p>
-                            اختر نوع الخدمة التي تحتاجها من الخدمات المتوفرة.
-                            سواء كنت تحتاج بوت ديسكورد، موقع، سيرفر ديسكورد،
-                            بنر، شعار، أو تصميم سيرفر حسب فكرتك الخاصة.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">02</div>
-
-                    <div class="step-content">
-                        <h3>اشرح فكرتك بالتفصيل</h3>
-
-                        <p>
-                            اكتب لنا وش تبي بالضبط، وكل التفاصيل المهمة
-                            في مشروعك. كل ما كانت فكرتك أوضح، كان أسهل علينا
-                            نفهم المطلوب ونجهز لك العمل بالشكل المناسب.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">03</div>
-
-                    <div class="step-content">
-                        <h3>أرسل أمثلة إذا عندك</h3>
-
-                        <p>
-                            إذا عندك صورة أو رابط أو تصميم مشابه للعمل
-                            اللي تبيه، حطه في خانة المرجع.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">04</div>
-
-                    <div class="step-content">
-                        <h3>حدد سرعة التنفيذ</h3>
-
-                        <p>
-                            اختر السرعة المناسبة لك. تقدر تختار التنفيذ
-                            العادي أو المستعجل أو تخلي الموضوع حسب الاتفاق.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">05</div>
-
-                    <div class="step-content">
-                        <h3>حدد ميزانيتك</h3>
-
-                        <p>
-                            اكتب السعر اللي يناسبك للخدمة.
-                            الميزانية تساعدنا نعرف نطاق العمل المناسب لك.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">06</div>
-
-                    <div class="step-content">
-                        <h3>راجع طلبك</h3>
-
-                        <p>
-                            قبل الإرسال راح تظهر لك جميع بيانات الطلب.
-                            راجع الخدمة والتفاصيل والميزانية والسرعة.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">07</div>
-
-                    <div class="step-content">
-                        <h3>أرسل الطلب</h3>
-
-                        <p>
-                            بعد التأكد من جميع البيانات اضغط إرسال الطلب.
-                            راح يتم إنشاء رقم خاص لطلبك.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="instruction-step">
-                    <div class="step-number">08</div>
-
-                    <div class="step-content">
-                        <h3>متابعة الطلب</h3>
-
-                        <p>
-                            بعد إرسال الطلب، للاستفسار أو متابعة طلبك
-                            ادخل سيرفر الديسكورد وافتح تكت.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="important-box">
-
-                <h3>
-                    معلومات مهمة قبل إرسال الطلب
-                </h3>
-
-                <div class="important-list">
-
-                    <div class="important-item">
-                        <span>01</span>
-                        <div>
-                            تأكد من كتابة تفاصيل المشروع بشكل واضح.
-                        </div>
-                    </div>
-
-                    <div class="important-item">
-                        <span>02</span>
-                        <div>
-                            السعر الذي تكتبه هو ميزانيتك المقترحة وليس بالضرورة السعر النهائي.
-                        </div>
-                    </div>
-
-                    <div class="important-item">
-                        <span>03</span>
-                        <div>
-                            قد يطلب منك فريق VANTA تفاصيل إضافية قبل بدء التنفيذ.
-                        </div>
-                    </div>
-
-                    <div class="important-item">
-                        <span>04</span>
-                        <div>
-                            لا ترسل كلمات مرور أو رموز دخول خاصة بحساباتك.
-                        </div>
-                    </div>
-
-                    <div class="important-item">
-                        <span>05</span>
-                        <div>
-                            إذا عندك مثال أضف رابطه حتى نفهم المطلوب بشكل أدق.
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="flow-box">
-
-                <h3>
-                    مراحل طلبك باختصار
-                </h3>
-
-                <div class="flow">
-
-                    <div class="flow-item">اختيار الخدمة</div>
-                    <div class="flow-arrow">←</div>
-                    <div class="flow-item">تفاصيل المشروع</div>
-                    <div class="flow-arrow">←</div>
-                    <div class="flow-item">الميزانية</div>
-                    <div class="flow-arrow">←</div>
-                    <div class="flow-item">مراجعة</div>
-                    <div class="flow-arrow">←</div>
-                    <div class="flow-item">إرسال الطلب</div>
-                    <div class="flow-arrow">←</div>
-                    <div class="flow-item">متابعة الطلب</div>
-
-                </div>
-
-            </div>
-
-            <div class="instructions-action">
-
-                <h3>
-                    جاهز تبدأ؟
-                </h3>
-
-                <p>
-                    اختر الخدمة المناسبة لك وابدأ بتفاصيل مشروعك.
-                </p>
-
-                <button
-                    class="main-btn"
-                    onclick="goTo('services')"
-                >
-                    اختيار الخدمة
-                </button>
-
-            </div>
-
+      <article class="step-card">
+        <span class="step-number">02</span>
+        <div>
+          <h3>اكتب التفاصيل</h3>
+          <p>اشرح فكرتك وأضف رابطًا مرجعيًا إن وجد.</p>
         </div>
+      </article>
 
-    </section>
-
-
-    <!-- SERVICES -->
-
-    <section id="services" class="screen">
-
-        <div class="section-head">
-
-            <span class="section-label">
-                VANTA SERVICES
-            </span>
-
-            <h2>
-                اختر خدمتك
-            </h2>
-
-            <p>
-                اختر الخدمة التي تريد تنفيذها
-            </p>
-
+      <article class="step-card">
+        <span class="step-number">03</span>
+        <div>
+          <h3>حدد الميزانية</h3>
+          <p>اكتب ميزانيتك بالعملة التي اخترتها.</p>
         </div>
+      </article>
 
-        <div class="service-grid">
-
-            <div
-                class="service-card"
-                onclick="chooseService('بوت ديسكورد')"
-            >
-                <div class="service-icon">🤖</div>
-
-                <h3>بوت ديسكورد</h3>
-
-                <p>
-                    برمجة بوت ديسكورد حسب فكرتك واحتياج سيرفرك.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('بوت ديسكورد')"
-                >
-                    <span>اختيار الخدمة</span>
-                    <span>←</span>
-                </button>
-            </div>
-
-            <div
-                class="service-card"
-                onclick="chooseService('موقع')"
-            >
-                <div class="service-icon">🌐</div>
-
-                <h3>موقع</h3>
-
-                <p>
-                    تصميم وبرمجة موقع احترافي خاص بمشروعك وفكرتك.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('موقع')"
-                >
-                    <span>اختيار الخدمة</span>
-                    <span>←</span>
-                </button>
-            </div>
-
-            <div
-                class="service-card"
-                onclick="chooseService('سيرفر ديسكورد جاهز')"
-            >
-                <div class="service-icon">💜</div>
-
-                <h3>سيرفر ديسكورد جاهز</h3>
-
-                <p>
-                    سيرفر متكامل بالرومات والرتب والتنظيم والتجهيز.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('سيرفر ديسكورد جاهز')"
-                >
-                    <span>اختيار الخدمة</span>
-                    <span>←</span>
-                </button>
-            </div>
-
-            <div
-                class="service-card"
-                onclick="chooseService('بنر')"
-            >
-                <div class="service-icon">🎨</div>
-
-                <h3>بنر</h3>
-
-                <p>
-                    تصميم بنر احترافي يناسب هوية مشروعك واستخدامك.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('بنر')"
-                >
-                    <span>اختيار الخدمة</span>
-                    <span>←</span>
-                </button>
-            </div>
-
-            <div
-                class="service-card"
-                onclick="chooseService('تصميم شعار')"
-            >
-                <div class="service-icon">✦</div>
-
-                <h3>تصميم شعار</h3>
-
-                <p>
-                    تصميم شعار خاص ومميز يعطي مشروعك هوية واضحة.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('تصميم شعار')"
-                >
-                    <span>اختيار الخدمة</span>
-                    <span>←</span>
-                </button>
-            </div>
-
-            <div
-                class="service-card featured"
-                onclick="chooseService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
-            >
-                <div class="service-icon">⚡</div>
-
-                <h3>تصميم سيرفر ديسكورد</h3>
-
-                <p>
-                    عندك فكرة خاصة؟ نحول فكرتك إلى سيرفر كامل
-                    على ذوقك واحتياج مشروعك.
-                </p>
-
-                <button
-                    class="service-select"
-                    onclick="event.stopPropagation(); chooseService('تصميم سيرفر ديسكورد — فكرة خاصة فيك')"
-                >
-                    <span>ابدأ فكرتك</span>
-                    <span>←</span>
-                </button>
-            </div>
-
+      <article class="step-card">
+        <span class="step-number">04</span>
+        <div>
+          <h3>أرسل الطلب</h3>
+          <p>سيظهر لك رقم الطلب لتتمكن من متابعة حالته.</p>
         </div>
-
-    </section>
-
-
-    <!-- DETAILS -->
-
-    <section id="details" class="screen">
-
-        <div class="section-head">
-
-            <span class="section-label">
-                PROJECT DETAILS
-            </span>
-
-            <h2>
-                تفاصيل مشروعك
-            </h2>
-
-            <p id="selectedServiceText">
-                الخدمة المختارة
-            </p>
-
-        </div>
-
-        <div class="details-form">
-
-            <label>اسم المشروع</label>
-
-            <input
-                id="projectName"
-                type="text"
-                placeholder="مثال: سيرفر VANTA"
-            >
-
-            <label>وش تبي بالضبط؟</label>
-
-            <textarea
-                id="description"
-                rows="6"
-                placeholder="اكتب فكرتك وتفاصيل طلبك هنا..."
-            ></textarea>
-
-            <label>رابط أو مثال مشابه</label>
-
-            <input
-                id="reference"
-                type="text"
-                placeholder="اختياري"
-            >
-
-            <label>سرعة التنفيذ</label>
-
-            <select id="speed">
-
-                <option value="">
-                    اختر السرعة
-                </option>
-
-                <option value="عادي">
-                    عادي
-                </option>
-
-                <option value="مستعجل">
-                    مستعجل
-                </option>
-
-                <option value="حسب الاتفاق">
-                    حسب الاتفاق
-                </option>
-
-            </select>
-
-            <div style="text-align:center">
-
-                <button
-                    class="main-btn"
-                    onclick="goToBudget()"
-                >
-                    التالي
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- BUDGET -->
-
-    <section id="budget" class="screen">
-
-        <div class="section-head">
-
-            <span class="section-label">
-                YOUR BUDGET
-            </span>
-
-            <h2>
-                كم ميزانيتك؟
-            </h2>
-
-            <p>
-                اكتب السعر اللي يناسبك، وبعدها نحدد السعر النهائي حسب تفاصيل الطلب.
-            </p>
-
-        </div>
-
-        <div class="budget-box">
-
-            <input
-                id="budgetInput"
-                type="number"
-                min="1"
-                placeholder="مثال: 20"
-            >
-
-            <div
-                id="currencyLabel"
-                class="currency-label"
-            >
-                العملة: KWD
-            </div>
-
-            <button
-                class="main-btn"
-                onclick="reviewOrder()"
-            >
-                مراجعة الطلب
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- REVIEW -->
-
-    <section id="review" class="screen">
-
-        <div class="section-head">
-
-            <span class="section-label">
-                REVIEW
-            </span>
-
-            <h2>
-                راجع طلبك
-            </h2>
-
-            <p>
-                تأكد من البيانات قبل الإرسال.
-            </p>
-
-        </div>
-
-        <div class="review-box">
-
-            <div class="review-row">
-                <span>الخدمة</span>
-                <strong id="reviewService">-</strong>
-            </div>
-
-            <div class="review-row">
-                <span>المشروع</span>
-                <strong id="reviewProject">-</strong>
-            </div>
-
-            <div class="review-row">
-                <span>التفاصيل</span>
-                <strong id="reviewDescription">-</strong>
-            </div>
-
-            <div class="review-row">
-                <span>المرجع</span>
-                <strong id="reviewReference">-</strong>
-            </div>
-
-            <div class="review-row">
-                <span>السرعة</span>
-                <strong id="reviewSpeed">-</strong>
-            </div>
-
-            <div class="review-row">
-                <span>الميزانية</span>
-                <strong id="reviewBudget">-</strong>
-            </div>
-
-        </div>
-
-        <div style="text-align:center">
-
-            <button
-                id="sendOrderBtn"
-                class="main-btn"
-                onclick="submitOrder()"
-            >
-                إرسال الطلب
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- SUCCESS -->
-
-    <section id="success" class="screen">
-
-        <div class="success-box">
-
-            <div class="success-icon">
-                ✓
-            </div>
-
-            <div class="section-label">
-                VANTA ORDER
-            </div>
-
-            <h2>
-                تم إرسال طلبك
-            </h2>
-
-            <p>
-                رقم طلبك
-            </p>
-
-            <div
-                id="orderId"
-                class="order-number"
-            >
-                VANTA-00000
-            </div>
-
-            <p id="successMessage">
-                للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت
-            </p>
-
-            <a
-                id="discordButton"
-                href="https://discord.gg/hMUXdaf58"
-                target="_blank"
-                class="main-btn"
-            >
-                دخول سيرفر الديسكورد
-            </a>
-
-            <button
-                class="secondary-btn"
-                onclick="resetOrder()"
-            >
-                طلب جديد
-            </button>
-
-        </div>
-
-    </section>
+      </article>
+    </div>
+
+    <button class="main-btn full-btn" onclick="showScreen('services')">
+      اختر خدمتك الآن ←
+    </button>
+  </section>
+
+  <!-- الخدمات -->
+  <section id="services" class="screen">
+    <div class="page-heading">
+      <span class="section-label">OUR SERVICES</span>
+      <h1>خدمات <span>VANTA</span></h1>
+      <p>اختر الخدمة وابدأ بتجهيز مشروعك.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <button class="service-card" onclick="chooseService('برمجة بوتات ديسكورد')">
+        <span class="service-icon">⌘</span>
+        <span class="service-title">بوتات ديسكورد</span>
+        <span class="service-description">بوتات مخصصة وأنظمة متكاملة لسيرفرك.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+      <button class="service-card" onclick="chooseService('تصميم وبرمجة المواقع')">
+        <span class="service-icon">⌘</span>
+        <span class="service-title">المواقع الإلكترونية</span>
+        <span class="service-description">مواقع عصرية مصممة حسب فكرتك.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+      <button class="service-card" onclick="chooseService('سيرفرات ديسكورد جاهزة')">
+        <span class="service-icon">◈</span>
+        <span class="service-title">سيرفرات جاهزة</span>
+        <span class="service-description">تنظيم قنوات ورتب وإعدادات السيرفر.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+      <button class="service-card" onclick="chooseService('تصميم بنرات')">
+        <span class="service-icon">▧</span>
+        <span class="service-title">البنرات</span>
+        <span class="service-description">بنرات مميزة لسيرفرك أو مشروعك.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+      <button class="service-card" onclick="chooseService('تصميم شعارات')">
+        <span class="service-icon">✦</span>
+        <span class="service-title">الشعارات</span>
+        <span class="service-description">شعار يناسب هويتك ويبرز علامتك.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+      <button class="service-card" onclick="chooseService('تصميم سيرفر ديسكورد مخصص')">
+        <span class="service-icon">▦</span>
+        <span class="service-title">تصميم سيرفر مخصص</span>
+        <span class="service-description">تصميم متكامل للقنوات والرتب والتجربة.</span>
+        <span class="service-bottom">اطلب الخدمة <b>←</b></span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- تفاصيل المشروع -->
+  <section id="details" class="screen">
+    <div class="page-heading">
+      <span class="section-label">PROJECT DETAILS</span>
+      <h1>تفاصيل <span>مشروعك</span></h1>
+      <p id="selectedServiceText">الخدمة المختارة</p>
+    </div>
+
+    <form class="form-card" onsubmit="goToBudget();return false">
+      <label for="projectName">اسم المشروع</label>
+      <input id="projectName" maxlength="100" placeholder="مثال: متجري الجديد" required>
+
+      <label for="description">اشرح فكرتك</label>
+      <textarea id="description" maxlength="2000" rows="5" placeholder="اكتب التفاصيل التي تحتاج تنفيذها..." required></textarea>
+
+      <label for="reference">رابط مرجعي <span class="optional">(اختياري)</span></label>
+      <input id="reference" type="url" maxlength="500" placeholder="https://example.com">
+
+      <label for="speed">مدة التنفيذ المطلوبة</label>
+      <select id="speed">
+        <option value="حسب الاتفاق">حسب الاتفاق</option>
+        <option value="عادي">عادي</option>
+        <option value="مستعجل">مستعجل</option>
+      </select>
+
+      <button class="main-btn full-btn" type="submit">متابعة للميزانية ←</button>
+      <button class="text-btn" type="button" onclick="showScreen('services')">العودة للخدمات</button>
+    </form>
+  </section>
+
+  <!-- الميزانية -->
+  <section id="budget" class="screen">
+    <div class="page-heading">
+      <span class="section-label">YOUR BUDGET</span>
+      <h1>حدد <span>ميزانيتك</span></h1>
+      <p>اكتب الميزانية المناسبة لمشروعك.</p>
+    </div>
+
+    <div class="form-card">
+      <div class="selected-service-box" id="budgetServiceText"></div>
+
+      <label for="budgetInput">الميزانية</label>
+      <div class="budget-input-wrap">
+        <input id="budgetInput" type="number" min="0.01" step="0.01" placeholder="مثال: 25" required>
+        <span id="currencyLabel">KWD</span>
+      </div>
+
+      <p class="form-note">الميزانية التي تدخلها تُرسل بالعملة المختارة. لا يتم تحويلها تلقائيًا إلى عملة أخرى.</p>
+
+      <button class="main-btn full-btn" onclick="reviewOrder()">مراجعة الطلب ←</button>
+      <button class="text-btn" onclick="showScreen('details')">رجوع</button>
+    </div>
+  </section>
+
+  <!-- مراجعة الطلب -->
+  <section id="review" class="screen">
+    <div class="page-heading">
+      <span class="section-label">REVIEW</span>
+      <h1>راجع <span>طلبك</span></h1>
+      <p>تأكد من المعلومات قبل الإرسال.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-row"><span>الخدمة</span><strong id="reviewService"></strong></div>
+      <div class="review-row"><span>المشروع</span><strong id="reviewProject"></strong></div>
+      <div class="review-row"><span>التفاصيل</span><strong id="reviewDescription"></strong></div>
+      <div class="review-row"><span>الرابط المرجعي</span><strong id="reviewReference"></strong></div>
+      <div class="review-row"><span>مدة التنفيذ</span><strong id="reviewSpeed"></strong></div>
+      <div class="review-row total-row"><span>الميزانية</span><strong id="reviewBudget"></strong></div>
+
+      <button id="submitButton" class="main-btn full-btn" onclick="submitOrder()">إرسال الطلب ↗</button>
+      <button class="text-btn" onclick="showScreen('budget')">تعديل الميزانية</button>
+    </div>
+  </section>
+
+  <!-- نجاح -->
+  <section id="success" class="screen">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <span class="section-label">REQUEST SUBMITTED</span>
+      <h1>وصل <span>طلبك!</span></h1>
+      <p>احتفظ برقم الطلب واستخدمه لمتابعة الحالة.</p>
+      <div class="order-number-box">
+        <span>رقم الطلب</span>
+        <strong id="orderId"></strong>
+      </div>
+      <button class="main-btn full-btn" onclick="copyOrderId()">نسخ رقم الطلب</button>
+      <button class="secondary-btn full-btn" onclick="showScreen('track');prefillTracking()">متابعة الطلب</button>
+      <a class="discord-wide" href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">تواصل معنا عبر ديسكورد ↗</a>
+      <button class="text-btn" onclick="resetOrder()">إنشاء طلب جديد</button>
+    </div>
+  </section>
+
+  <!-- متابعة الطلب -->
+  <section id="track" class="screen">
+    <div class="page-heading">
+      <span class="section-label">ORDER TRACKING</span>
+      <h1>تابع <span>طلبك</span></h1>
+      <p>أدخل رقم الطلب لمعرفة آخر حالة مسجلة.</p>
+    </div>
+
+    <div class="form-card">
+      <label for="trackingId">رقم الطلب</label>
+      <input id="trackingId" placeholder="VANTA-12345" maxlength="30">
+      <button class="main-btn full-btn" onclick="trackOrder()">بحث عن الطلب ←</button>
+      <div id="trackingResult" class="tracking-result" aria-live="polite"></div>
+    </div>
+  </section>
 
 </main>
 
-
-<footer>
-
-    <div class="footer-title">
-        التواصل مع الجهة المختصة
-    </div>
-
-    <div class="whatsapp-contacts">
-
-        <a
-            class="whatsapp-button"
-            href="https://wa.me/96598775651"
-            target="_blank"
-        >
-            واتساب 1
-        </a>
-
-        <a
-            class="whatsapp-button"
-            href="https://wa.me/96596729882"
-            target="_blank"
-        >
-            واتساب 2
-        </a>
-
-    </div>
-
-    <p>
-        VANTA © 2026
-    </p>
-
+<footer class="footer">
+  <a class="footer-brand" href="#" onclick="showScreen('home');return false">VANTA<span>.</span></a>
+  <p>نصنع فكرتك بطريقة مختلفة.</p>
+  <div class="footer-links">
+    <a href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">Discord</a>
+    <a href="https://wa.me/96598775651" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://wa.me/96596729882" target="_blank" rel="noopener">WhatsApp 2</a>
+  </div>
+  <small>VANTA © 2026 — جميع الحقوق محفوظة</small>
 </footer>
 
-
-<!-- COUNTRY MODAL -->
-
-<div id="vantaCountryModal">
-
-    <div class="country-modal-box">
-
-        <div class="country-logo">
-            VANTA
-        </div>
-
-        <h2>
-            اختر دولتك
-        </h2>
-
-        <p>
-            عشان نعرض لك الأسعار بعملة دولتك
-        </p>
-
-        <select id="countrySelect">
-
-            <option value="">
-                اختر دولتك
-            </option>
-
-        </select>
-
-        <button
-            id="countryConfirm"
-            class="main-btn"
-            onclick="confirmCountry()"
-        >
-            متابعة
-        </button>
-
-    </div>
-
+<!-- اختيار الدولة والعملة -->
+<div id="countryModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-logo">V</div>
+    <h2>أهلًا بك في VANTA</h2>
+    <p>اختر دولتك لعرض رمز العملة المناسب.</p>
+    <label for="countrySelect">الدولة</label>
+    <select id="countrySelect">
+      <option value="KW">الكويت — KWD</option>
+      <option value="SA">السعودية — SAR</option>
+      <option value="AE">الإمارات — AED</option>
+      <option value="QA">قطر — QAR</option>
+      <option value="BH">البحرين — BHD</option>
+      <option value="OM">عُمان — OMR</option>
+      <option value="US">الولايات المتحدة — USD</option>
+      <option value="GB">بريطانيا — GBP</option>
+      <option value="EG">مصر — EGP</option>
+    </select>
+    <button class="main-btn full-btn" onclick="confirmCountry()">متابعة ←</button>
+  </div>
 </div>
 
-
-<script>
-
-let order = {
-    service: "",
-    projectName: "",
-    description: "",
-    reference: "",
-    speed: "",
-    budget: "",
-    currency: "KWD",
-    country: "KW"
-};
-
-
-/* =========================
-   COUNTRIES + CURRENCIES
-========================= */
-
-const COUNTRIES = {
-
-    KW: { name: "الكويت", flag: "🇰🇼", currency: "KWD", locale: "ar-KW" },
-    SA: { name: "السعودية", flag: "🇸🇦", currency: "SAR", locale: "ar-SA" },
-    AE: { name: "الإمارات", flag: "🇦🇪", currency: "AED", locale: "ar-AE" },
-    QA: { name: "قطر", flag: "🇶🇦", currency: "QAR", locale: "ar-QA" },
-    BH: { name: "البحرين", flag: "🇧🇭", currency: "BHD", locale: "ar-BH" },
-    OM: { name: "عُمان", flag: "🇴🇲", currency: "OMR", locale: "ar-OM" },
-    JO: { name: "الأردن", flag: "🇯🇴", currency: "JOD", locale: "ar-JO" },
-    EG: { name: "مصر", flag: "🇪🇬", currency: "EGP", locale: "ar-EG" },
-    IQ: { name: "العراق", flag: "🇮🇶", currency: "IQD", locale: "ar-IQ" },
-    MA: { name: "المغرب", flag: "🇲🇦", currency: "MAD", locale: "ar-MA" },
-    DZ: { name: "الجزائر", flag: "🇩🇿", currency: "DZD", locale: "ar-DZ" },
-    TN: { name: "تونس", flag: "🇹🇳", currency: "TND", locale: "ar-TN" },
-    LY: { name: "ليبيا", flag: "🇱🇾", currency: "LYD", locale: "ar-LY" },
-    SD: { name: "السودان", flag: "🇸🇩", currency: "SDG", locale: "ar-SD" },
-    YE: { name: "اليمن", flag: "🇾🇪", currency: "YER", locale: "ar-YE" },
-    LB: { name: "لبنان", flag: "🇱🇧", currency: "LBP", locale: "ar-LB" },
-    PS: { name: "فلسطين", flag: "🇵🇸", currency: "ILS", locale: "ar-PS" },
-
-    US: { name: "أمريكا", flag: "🇺🇸", currency: "USD", locale: "en-US" },
-    CA: { name: "كندا", flag: "🇨🇦", currency: "CAD", locale: "en-CA" },
-    GB: { name: "بريطانيا", flag: "🇬🇧", currency: "GBP", locale: "en-GB" },
-    AU: { name: "أستراليا", flag: "🇦🇺", currency: "AUD", locale: "en-AU" },
-    NZ: { name: "نيوزيلندا", flag: "🇳🇿", currency: "NZD", locale: "en-NZ" },
-
-    DE: { name: "ألمانيا", flag: "🇩🇪", currency: "EUR", locale: "de-DE" },
-    FR: { name: "فرنسا", flag: "🇫🇷", currency: "EUR", locale: "fr-FR" },
-    IT: { name: "إيطاليا", flag: "🇮🇹", currency: "EUR", locale: "it-IT" },
-    ES: { name: "إسبانيا", flag: "🇪🇸", currency: "EUR", locale: "es-ES" },
-    PT: { name: "البرتغال", flag: "🇵🇹", currency: "EUR", locale: "pt-PT" },
-    NL: { name: "هولندا", flag: "🇳🇱", currency: "EUR", locale: "nl-NL" },
-    BE: { name: "بلجيكا", flag: "🇧🇪", currency: "EUR", locale: "nl-BE" },
-    AT: { name: "النمسا", flag: "🇦🇹", currency: "EUR", locale: "de-AT" },
-    GR: { name: "اليونان", flag: "🇬🇷", currency: "EUR", locale: "el-GR" },
-    IE: { name: "أيرلندا", flag: "🇮🇪", currency: "EUR", locale: "en-IE" },
-    FI: { name: "فنلندا", flag: "🇫🇮", currency: "EUR", locale: "fi-FI" },
-
-    SE: { name: "السويد", flag: "🇸🇪", currency: "SEK", locale: "sv-SE" },
-    NO: { name: "النرويج", flag: "🇳🇴", currency: "NOK", locale: "nb-NO" },
-    DK: { name: "الدنمارك", flag: "🇩🇰", currency: "DKK", locale: "da-DK" },
-    CH: { name: "سويسرا", flag: "🇨🇭", currency: "CHF", locale: "de-CH" },
-    PL: { name: "بولندا", flag: "🇵🇱", currency: "PLN", locale: "pl-PL" },
-    CZ: { name: "التشيك", flag: "🇨🇿", currency: "CZK", locale: "cs-CZ" },
-    RO: { name: "رومانيا", flag: "🇷🇴", currency: "RON", locale: "ro-RO" },
-    HU: { name: "المجر", flag: "🇭🇺", currency: "HUF", locale: "hu-HU" },
-    UA: { name: "أوكرانيا", flag: "🇺🇦", currency: "UAH", locale: "uk-UA" },
-    TR: { name: "تركيا", flag: "🇹🇷", currency: "TRY", locale: "tr-TR" },
-    RU: { name: "روسيا", flag: "🇷🇺", currency: "RUB", locale: "ru-RU" },
-
-    JP: { name: "اليابان", flag: "🇯🇵", currency: "JPY", locale: "ja-JP" },
-    CN: { name: "الصين", flag: "🇨🇳", currency: "CNY", locale: "zh-CN" },
-    KR: { name: "كوريا الجنوبية", flag: "🇰🇷", currency: "KRW", locale: "ko-KR" },
-    IN: { name: "الهند", flag: "🇮🇳", currency: "INR", locale: "en-IN" },
-    PK: { name: "باكستان", flag: "🇵🇰", currency: "PKR", locale: "en-PK" },
-    ID: { name: "إندونيسيا", flag: "🇮🇩", currency: "IDR", locale: "id-ID" },
-    MY: { name: "ماليزيا", flag: "🇲🇾", currency: "MYR", locale: "ms-MY" },
-    SG: { name: "سنغافورة", flag: "🇸🇬", currency: "SGD", locale: "en-SG" },
-    TH: { name: "تايلاند", flag: "🇹🇭", currency: "THB", locale: "th-TH" },
-    VN: { name: "فيتنام", flag: "🇻🇳", currency: "VND", locale: "vi-VN" },
-    PH: { name: "الفلبين", flag: "🇵🇭", currency: "PHP", locale: "en-PH" },
-
-    BR: { name: "البرازيل", flag: "🇧🇷", currency: "BRL", locale: "pt-BR" },
-    MX: { name: "المكسيك", flag: "🇲🇽", currency: "MXN", locale: "es-MX" },
-    AR: { name: "الأرجنتين", flag: "🇦🇷", currency: "ARS", locale: "es-AR" },
-    CL: { name: "تشيلي", flag: "🇨🇱", currency: "CLP", locale: "es-CL" },
-    CO: { name: "كولومبيا", flag: "🇨🇴", currency: "COP", locale: "es-CO" },
-
-    ZA: { name: "جنوب أفريقيا", flag: "🇿🇦", currency: "ZAR", locale: "en-ZA" },
-    NG: { name: "نيجيريا", flag: "🇳🇬", currency: "NGN", locale: "en-NG" },
-    KE: { name: "كينيا", flag: "🇰🇪", currency: "KES", locale: "en-KE" }
-
-};
-
-
-/* =========================
-   COUNTRY SETUP
-========================= */
-
-const savedCountry =
-    localStorage.getItem("vanta_country");
-
-if (savedCountry && COUNTRIES[savedCountry]) {
-
-    setCountry(savedCountry);
-
-} else {
-
-    document.getElementById("vantaCountryModal").style.display = "flex";
-
-}
-
-
-const countrySelect =
-    document.getElementById("countrySelect");
-
-
-Object.entries(COUNTRIES)
-    .sort((a, b) =>
-        a[1].name.localeCompare(
-            b[1].name,
-            "ar"
-        )
-    )
-    .forEach(([code, country]) => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = code;
-
-        option.textContent =
-            `${country.flag} ${country.name} — ${country.currency}`;
-
-        countrySelect.appendChild(option);
-
-    });
-
-
-function confirmCountry() {
-
-    const selected =
-        countrySelect.value;
-
-    if (!selected) {
-
-        countrySelect.style.borderColor =
-            "#ff3864";
-
-        return;
-    }
-
-    setCountry(selected);
-
-    document
-        .getElementById("vantaCountryModal")
-        .style.display = "none";
-
-}
-
-
-function setCountry(code) {
-
-    if (!COUNTRIES[code]) {
-        code = "KW";
-    }
-
-    const country =
-        COUNTRIES[code];
-
-    order.country =
-        code;
-
-    order.currency =
-        country.currency;
-
-    localStorage.setItem(
-        "vanta_country",
-        code
-    );
-
-    const currencyLabel =
-        document.getElementById(
-            "currencyLabel"
-        );
-
-    if (currencyLabel) {
-
-        currencyLabel.textContent =
-            `العملة: ${country.currency}`;
-
-    }
-
-    updateCurrencyButton();
-
-}
-
-
-function updateCurrencyButton() {
-
-    let button =
-        document.getElementById(
-            "countryChangeButton"
-        );
-
-    if (!button) {
-
-        button =
-            document.createElement("button");
-
-        button.id =
-            "countryChangeButton";
-
-        document.body.appendChild(button);
-
-    }
-
-    const country =
-        COUNTRIES[
-            localStorage.getItem(
-                "vanta_country"
-            )
-        ] || COUNTRIES.KW;
-
-    button.textContent =
-        `${country.flag} ${country.name} — ${country.currency}`;
-
-    button.onclick = () => {
-
-        document
-            .getElementById(
-                "vantaCountryModal"
-            )
-            .style.display = "flex";
-
-        countrySelect.value =
-            localStorage.getItem(
-                "vanta_country"
-            ) || "KW";
-
-    };
-
-}
-
-
-/* =========================
-   FORMAT CURRENCY
-========================= */
-
-function formatCurrency(amount) {
-
-    const code =
-        localStorage.getItem(
-            "vanta_country"
-        ) || "KW";
-
-    const country =
-        COUNTRIES[code] || COUNTRIES.KW;
-
-    const number =
-        Number(amount);
-
-    if (!Number.isFinite(number)) {
-        return amount;
-    }
-
-    return new Intl.NumberFormat(
-        country.locale,
-        {
-            style: "currency",
-            currency: country.currency,
-            currencyDisplay: "symbol",
-            maximumFractionDigits: 2
-        }
-    ).format(number);
-
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function goTo(id) {
-
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
-            screen.classList.remove("active");
-        });
-
-    const target =
-        document.getElementById(id);
-
-    if (target) {
-
-        target.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================
-   SERVICE
-========================= */
-
-function chooseService(service) {
-
-    order.service =
-        service;
-
-    const text =
-        document.getElementById(
-            "selectedServiceText"
-        );
-
-    if (text) {
-
-        text.textContent =
-            "الخدمة المختارة: " +
-            service;
-
-    }
-
-    goTo("details");
-
-}
-
-
-/* =========================
-   DETAILS
-========================= */
-
-function goToBudget() {
-
-    const projectName =
-        document
-            .getElementById(
-                "projectName"
-            )
-            .value
-            .trim();
-
-    const description =
-        document
-            .getElementById(
-                "description"
-            )
-            .value
-            .trim();
-
-    const reference =
-        document
-            .getElementById(
-                "reference"
-            )
-            .value
-            .trim();
-
-    const speed =
-        document
-            .getElementById(
-                "speed"
-            )
-            .value;
-
-
-    if (!projectName) {
-
-        alert(
-            "اكتب اسم المشروع"
-        );
-
-        return;
-    }
-
-
-    if (!description) {
-
-        alert(
-            "اكتب تفاصيل المشروع"
-        );
-
-        return;
-    }
-
-
-    order.projectName =
-        projectName;
-
-    order.description =
-        description;
-
-    order.reference =
-        reference;
-
-    order.speed =
-        speed || "غير محدد";
-
-
-    goTo("budget");
-
-}
-
-
-/* =========================
-   REVIEW
-========================= */
-
-function reviewOrder() {
-
-    const budget =
-        document
-            .getElementById(
-                "budgetInput"
-            )
-            .value
-            .trim();
-
-
-    if (!budget) {
-
-        alert(
-            "حدد السعر اللي يناسبك"
-        );
-
-        return;
-    }
-
-
-    if (Number(budget) <= 0) {
-
-        alert(
-            "اكتب ميزانية صحيحة"
-        );
-
-        return;
-    }
-
-
-    order.budget =
-        budget;
-
-
-    document
-        .getElementById(
-            "reviewService"
-        )
-        .textContent =
-        order.service;
-
-
-    document
-        .getElementById(
-            "reviewProject"
-        )
-        .textContent =
-        order.projectName;
-
-
-    document
-        .getElementById(
-            "reviewDescription"
-        )
-        .textContent =
-        order.description;
-
-
-    document
-        .getElementById(
-            "reviewReference"
-        )
-        .textContent =
-        order.reference ||
-        "لا يوجد";
-
-
-    document
-        .getElementById(
-            "reviewSpeed"
-        )
-        .textContent =
-        order.speed;
-
-
-    document
-        .getElementById(
-            "reviewBudget"
-        )
-        .textContent =
-        formatCurrency(
-            order.budget
-        );
-
-
-    goTo("review");
-
-}
-
-
-/* =========================
-   SUBMIT
-========================= */
-
-async function submitOrder() {
-
-    const button =
-        document.getElementById(
-            "sendOrderBtn"
-        );
-
-
-    button.disabled =
-        true;
-
-    button.textContent =
-        "جاري إرسال الطلب...";
-
-
-    try {
-
-        const response =
-            await fetch(
-                "/api/orders",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            service:
-                                order.service,
-
-                            projectName:
-                                order.projectName,
-
-                            description:
-                                order.description,
-
-                            reference:
-                                order.reference,
-
-                            speed:
-                                order.speed,
-
-                            budget:
-                                order.budget,
-
-                            currency:
-                                order.currency,
-
-                            country:
-                                order.country
-
-                        })
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.error ||
-                "فشل إرسال الطلب"
-            );
-
-        }
-
-
-        const orderId =
-            data.orderId ||
-            data.order?.orderId ||
-            "VANTA-" +
-            Math.floor(
-                10000 +
-                Math.random() * 90000
-            );
-
-
-        document
-            .getElementById(
-                "orderId"
-            )
-            .textContent =
-            orderId;
-
-
-        document
-            .getElementById(
-                "successMessage"
-            )
-            .textContent =
-            "للاستفسار عن طلبك ادخل سيرفر الديسكورد وافتح تكت";
-
-
-        goTo("success");
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "صار خطأ أثناء إرسال الطلب، حاول مرة ثانية."
-        );
-
-        button.disabled =
-            false;
-
-        button.textContent =
-            "إرسال الطلب";
-
-    }
-
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-function resetOrder() {
-
-    order = {
-        service: "",
-        projectName: "",
-        description: "",
-        reference: "",
-        speed: "",
-        budget: "",
-        currency:
-            COUNTRIES[
-                localStorage.getItem(
-                    "vanta_country"
-                )
-            ]?.currency || "KWD",
-        country:
-            localStorage.getItem(
-                "vanta_country"
-            ) || "KW"
-    };
-
-
-    document
-        .getElementById(
-            "projectName"
-        )
-        .value = "";
-
-    document
-        .getElementById(
-            "description"
-        )
-        .value = "";
-
-    document
-        .getElementById(
-            "reference"
-        )
-        .value = "";
-
-    document
-        .getElementById(
-            "speed"
-        )
-        .value = "";
-
-    document
-        .getElementById(
-            "budgetInput"
-        )
-        .value = "";
-
-
-    const button =
-        document.getElementById(
-            "sendOrderBtn"
-        );
-
-    button.disabled =
-        false;
-
-    button.textContent =
-        "إرسال الطلب";
-
-
-    goTo("services");
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-updateCurrencyButton();
-
-</script>
-
+<script src="/app.js"></script>
 </body>
 </html>
