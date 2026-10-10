@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#09090d">
-  <meta name="description" content="VANTA — نصنع فكرتك بطريقة مختلفة. خدمات برمجة وتصميم رقمية احترافية.">
+  <meta name="description" content="VANTA — نصنع فكرتك بطريقة مختلفة. برمجة وتصميم وخدمات رقمية.">
   <title>VANTA | فكرتك تبدأ من هنا</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -33,37 +33,35 @@
   <!-- الرئيسية -->
   <section id="home" class="screen active">
     <div class="hero">
-      <div class="hero-badge">
-        <span class="status-dot"></span>
-        استوديو VANTA الرقمي
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="status-dot"></span>
+          استوديو VANTA الرقمي
+        </div>
+
+        <h1>فكرتك تبدأ<br><span>من هنا.</span></h1>
+
+        <p class="hero-description">
+          نصنع فكرتك بطريقة مختلفة من خلال البرمجة والتصميم
+          ونبني لك تجربة رقمية تليق بطموحك.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="main-btn" onclick="showScreen('services')">
+            اكتشف خدماتنا <span>←</span>
+          </button>
+          <button class="secondary-btn" onclick="showScreen('instructions')">
+            كيف تطلب؟
+          </button>
+        </div>
+
+        <div class="hero-footer">
+          <span class="hero-line"></span>
+          <span>إبداع • برمجة • تصميم</span>
+        </div>
       </div>
 
-      <h1>
-        فكرتك تبدأ<br>
-        <span>من هنا.</span>
-      </h1>
-
-      <p class="hero-description">
-        نصنع فكرتك بطريقة مختلفة من خلال البرمجة والتصميم
-        ونبني لك تجربة رقمية تليق بطموحك.
-      </p>
-
-      <div class="hero-buttons">
-        <button class="main-btn" onclick="showScreen('services')">
-          اكتشف خدماتنا <span>←</span>
-        </button>
-
-        <button class="secondary-btn" onclick="showScreen('instructions')">
-          كيف تطلب؟
-        </button>
-      </div>
-
-      <div class="hero-footer">
-        <span class="hero-line"></span>
-        <span>إبداع • برمجة • تصميم</span>
-      </div>
-
-      <div class="hero-decoration">
+      <div class="hero-decoration" aria-hidden="true">
         <div class="decoration-circle circle-one"></div>
         <div class="decoration-circle circle-two"></div>
         <div class="decoration-v">V</div>
@@ -102,7 +100,9 @@
         <h2>عندك فكرة؟ خلنا نبدأ.</h2>
         <p>أرسل تفاصيل مشروعك ونساعدك تحولها إلى واقع.</p>
       </div>
-      <button class="main-btn" onclick="showScreen('services')">ابدأ مشروعك ←</button>
+      <button class="main-btn" onclick="showScreen('services')">
+        ابدأ مشروعك ←
+      </button>
     </div>
   </section>
 
@@ -143,7 +143,7 @@
         <span class="step-number">04</span>
         <div>
           <h3>أرسل الطلب</h3>
-          <p>سيظهر لك رقم الطلب لتتمكن من متابعة حالته.</p>
+          <p>احتفظ برقم الطلب لمتابعة حالته لاحقًا.</p>
         </div>
       </article>
     </div>
@@ -162,7 +162,6 @@
     </div>
 
     <div class="services-grid">
-
       <button class="service-card" onclick="chooseService('برمجة بوتات ديسكورد')">
         <span class="service-icon">⌘</span>
         <span class="service-title">بوتات ديسكورد</span>
@@ -204,7 +203,6 @@
         <span class="service-description">تصميم متكامل للقنوات والرتب والتجربة.</span>
         <span class="service-bottom">اطلب الخدمة <b>←</b></span>
       </button>
-
     </div>
   </section>
 
@@ -255,10 +253,12 @@
         <span id="currencyLabel">KWD</span>
       </div>
 
-      <p class="form-note">الميزانية التي تدخلها تُرسل بالعملة المختارة. لا يتم تحويلها تلقائيًا إلى عملة أخرى.</p>
+      <p class="form-note">
+        العملة المختارة تحدد طريقة عرض الميزانية فقط، ولا يتم تحويل المبلغ تلقائيًا.
+      </p>
 
-      <button class="main-btn full-btn" onclick="reviewOrder()">مراجعة الطلب ←</button>
-      <button class="text-btn" onclick="showScreen('details')">رجوع</button>
+      <button class="main-btn full-btn" type="button" onclick="reviewOrder()">مراجعة الطلب ←</button>
+      <button class="text-btn" type="button" onclick="showScreen('details')">رجوع</button>
     </div>
   </section>
 
@@ -271,32 +271,67 @@
     </div>
 
     <div class="review-card">
-      <div class="review-row"><span>الخدمة</span><strong id="reviewService"></strong></div>
-      <div class="review-row"><span>المشروع</span><strong id="reviewProject"></strong></div>
-      <div class="review-row"><span>التفاصيل</span><strong id="reviewDescription"></strong></div>
-      <div class="review-row"><span>الرابط المرجعي</span><strong id="reviewReference"></strong></div>
-      <div class="review-row"><span>مدة التنفيذ</span><strong id="reviewSpeed"></strong></div>
-      <div class="review-row total-row"><span>الميزانية</span><strong id="reviewBudget"></strong></div>
+      <div class="review-row">
+        <span>الخدمة</span>
+        <strong id="reviewService"></strong>
+      </div>
 
-      <button id="submitButton" class="main-btn full-btn" onclick="submitOrder()">إرسال الطلب ↗</button>
+      <div class="review-row">
+        <span>المشروع</span>
+        <strong id="reviewProject"></strong>
+      </div>
+
+      <div class="review-row">
+        <span>التفاصيل</span>
+        <strong id="reviewDescription"></strong>
+      </div>
+
+      <div class="review-row">
+        <span>الرابط المرجعي</span>
+        <strong id="reviewReference"></strong>
+      </div>
+
+      <div class="review-row">
+        <span>مدة التنفيذ</span>
+        <strong id="reviewSpeed"></strong>
+      </div>
+
+      <div class="review-row total-row">
+        <span>الميزانية</span>
+        <strong id="reviewBudget"></strong>
+      </div>
+
+      <button id="submitButton" class="main-btn full-btn" onclick="submitOrder()">
+        إرسال الطلب ↗
+      </button>
+
       <button class="text-btn" onclick="showScreen('budget')">تعديل الميزانية</button>
     </div>
   </section>
 
-  <!-- نجاح -->
+  <!-- نجاح الطلب -->
   <section id="success" class="screen">
     <div class="success-card">
       <div class="success-icon">✓</div>
       <span class="section-label">REQUEST SUBMITTED</span>
       <h1>وصل <span>طلبك!</span></h1>
       <p>احتفظ برقم الطلب واستخدمه لمتابعة الحالة.</p>
+
       <div class="order-number-box">
         <span>رقم الطلب</span>
         <strong id="orderId"></strong>
       </div>
+
       <button class="main-btn full-btn" onclick="copyOrderId()">نسخ رقم الطلب</button>
-      <button class="secondary-btn full-btn" onclick="showScreen('track');prefillTracking()">متابعة الطلب</button>
-      <a class="discord-wide" href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">تواصل معنا عبر ديسكورد ↗</a>
+
+      <button class="secondary-btn full-btn" onclick="prefillTracking();showScreen('track')">
+        متابعة الطلب
+      </button>
+
+      <a class="discord-wide" href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">
+        تواصل معنا عبر ديسكورد ↗
+      </a>
+
       <button class="text-btn" onclick="resetOrder()">إنشاء طلب جديد</button>
     </div>
   </section>
@@ -312,7 +347,9 @@
     <div class="form-card">
       <label for="trackingId">رقم الطلب</label>
       <input id="trackingId" placeholder="VANTA-12345" maxlength="30">
+
       <button class="main-btn full-btn" onclick="trackOrder()">بحث عن الطلب ←</button>
+
       <div id="trackingResult" class="tracking-result" aria-live="polite"></div>
     </div>
   </section>
@@ -322,21 +359,25 @@
 <footer class="footer">
   <a class="footer-brand" href="#" onclick="showScreen('home');return false">VANTA<span>.</span></a>
   <p>نصنع فكرتك بطريقة مختلفة.</p>
+
   <div class="footer-links">
     <a href="https://discord.gg/hMUXdaf58" target="_blank" rel="noopener">Discord</a>
     <a href="https://wa.me/96598775651" target="_blank" rel="noopener">WhatsApp</a>
     <a href="https://wa.me/96596729882" target="_blank" rel="noopener">WhatsApp 2</a>
   </div>
+
   <small>VANTA © 2026 — جميع الحقوق محفوظة</small>
 </footer>
 
-<!-- اختيار الدولة والعملة -->
+<!-- نافذة الدولة -->
 <div id="countryModal" class="modal-overlay">
   <div class="modal-card">
     <div class="modal-logo">V</div>
     <h2>أهلًا بك في VANTA</h2>
     <p>اختر دولتك لعرض رمز العملة المناسب.</p>
+
     <label for="countrySelect">الدولة</label>
+
     <select id="countrySelect">
       <option value="KW">الكويت — KWD</option>
       <option value="SA">السعودية — SAR</option>
@@ -348,6 +389,7 @@
       <option value="GB">بريطانيا — GBP</option>
       <option value="EG">مصر — EGP</option>
     </select>
+
     <button class="main-btn full-btn" onclick="confirmCountry()">متابعة ←</button>
   </div>
 </div>
